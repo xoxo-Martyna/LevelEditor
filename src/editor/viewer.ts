@@ -133,11 +133,25 @@ export class Viewer {
             (e.clientY - rect.y) / 32
         )
 
-        this.currentTool.process(
-            this,
-            x, y,
-            e.type === "mousemove"
-        )
+        if (e.buttons & 1) {
+            this.currentTool.process(
+                this,
+                x, y,
+                e.type === "mousemove"
+            )
+        } else {
+            const tile = this.level.getTileAt(x, y)
+            let tileId = "N/A"
+            if (tile) tileId = tile.tile.id
+
+            document.querySelector(
+                "div.viewerCoordinates"
+            ).innerHTML = `
+                ${tileId}<br>
+                X: ${x}<br>
+                Y: ${y}
+            `
+        }
     }
 
     setupDOM() {
@@ -146,7 +160,7 @@ export class Viewer {
         )
         this.canvas.addEventListener(
             "mousemove", (e) => {
-                if (e.buttons & 1) this.processTool(e)
+                this.processTool(e)
             }
         )
 
@@ -191,6 +205,25 @@ export class Viewer {
             })
 
             tilebar.appendChild(tileDiv)
+        })
+
+        document.querySelector("input#showGrid").addEventListener("input", (e) => {
+            const input = e.target as HTMLInputElement
+
+            this.grid = input.checked
+            this.render()
+        })
+        document.querySelector("input#showColliders").addEventListener("input", (e) => {
+            const input = e.target as HTMLInputElement
+
+            this.collisionBoxes = input.checked
+            this.render()
+        })
+        document.querySelector("input#showFX").addEventListener("input", (e) => {
+            const input = e.target as HTMLInputElement
+
+            this.effectBoxes = input.checked
+            this.render()
         })
     }
 }

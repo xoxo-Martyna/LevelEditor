@@ -129,5 +129,48 @@ export class Viewer {
                 if (e.buttons & 1) this.processTool(e)
             }
         )
+
+        const toolbar = document.querySelector("div.toolbar")
+        this.tools.forEach(tool => {
+            const toolDiv = document.createElement("div")
+            toolDiv.classList.add("tool")
+            toolDiv.classList.toggle("active", this.currentTool === tool)
+
+            toolDiv.innerHTML = `
+                <img src="../res/icons/${tool.id}.svg">
+                <p>${tool.name}</p>
+            `
+
+            toolDiv.addEventListener("click", () => {
+                toolbar.querySelector("div.active").classList.remove("active")
+                toolDiv.classList.add("active")
+
+                this.currentTool = tool
+            })
+
+            toolbar.appendChild(toolDiv)
+        })
+
+        const tilebar = document.querySelector("div.tileList")
+        this.availableTiles.forEach(tile => {
+            const tileDiv = document.createElement("div")
+            tileDiv.classList.add("tile")
+            tileDiv.classList.toggle("active", this.currentTile === tile)
+            tileDiv.classList.toggle("collidable", tile.collidable)
+
+            tileDiv.innerHTML = `
+                <img src="../res/tiles/${tile.id}.png">
+                <p>${tile.id}</p>
+            `
+
+            tileDiv.addEventListener("click", () => {
+                tilebar.querySelector("div.active").classList.remove("active")
+                tileDiv.classList.add("active")
+
+                this.currentTile = tile
+            })
+
+            tilebar.appendChild(tileDiv)
+        })
     }
 }

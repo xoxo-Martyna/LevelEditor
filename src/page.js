@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\ndiv.tabs {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  padding: 4px 8px 0px 8px;\n  display: flex; }\n  div.tabs button {\n    background: #1b1b1b;\n    color: #aaa;\n    font-family: \"Segoe UI\", sans-serif;\n    font-size: 10pt;\n    padding: 4px 12px;\n    margin: 0px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    border: none;\n    outline: none; }\n    div.tabs button.active {\n      background: #383838;\n      color: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 29px;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 96px;\n    min-width: 96px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section:not(:last-child) {\n      border-bottom: 1px solid #fff1; }\n    main aside section header {\n      font-size: 10pt;\n      font-weight: 400;\n      text-align: center;\n      padding: 2px;\n      opacity: 0.5; }\n    main aside section div.layerViz {\n      display: flex; }\n      main aside section div.layerViz label {\n        font-size: 10pt;\n        padding-left: 8px;\n        flex-grow: 1; }\n    main aside section div.tileList {\n      overflow-y: auto; }\n      main aside section div.tileList div.tile {\n        padding: 4px;\n        display: flex;\n        flex-direction: column;\n        align-items: center; }\n        main aside section div.tileList div.tile p {\n          font-size: 10pt;\n          text-align: center;\n          margin: 0; }\n  main canvas {\n    flex-grow: 1; }\n", ""]);
+exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\ndiv.tabs {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  padding: 4px 8px 0px 8px;\n  display: flex; }\n  div.tabs button {\n    background: #1b1b1b;\n    color: #aaa;\n    font-family: \"Segoe UI\", sans-serif;\n    font-size: 10pt;\n    padding: 4px 12px;\n    margin: 0px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    border: none;\n    outline: none; }\n    div.tabs button.active {\n      background: #383838;\n      color: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 29px;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 96px;\n    min-width: 96px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section:not(:last-child) {\n      border-bottom: 1px solid #fff1; }\n    main aside section header {\n      font-size: 10pt;\n      font-weight: 400;\n      text-align: center;\n      padding: 2px;\n      opacity: 0.5; }\n    main aside section div.layerViz {\n      display: flex; }\n      main aside section div.layerViz label {\n        font-size: 10pt;\n        padding-left: 8px;\n        flex-grow: 1; }\n    main aside section.tileList {\n      flex-grow: 1; }\n      main aside section.tileList div.tileList {\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          padding: 4px;\n          border-radius: 2px;\n          display: flex;\n          flex-direction: column;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n  main canvas {\n    flex-grow: 1; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -673,12 +673,39 @@ var Viewer = /** @class */ (function () {
         var y = Math.floor((e.clientY - rect.y) / 32);
         this.currentTool.process(this, x, y, e.type === "mousemove");
     };
-    Viewer.prototype.setupEvents = function () {
+    Viewer.prototype.setupDOM = function () {
         var _this = this;
         this.canvas.addEventListener("mouseup", function (e) { return _this.processTool(e); });
         this.canvas.addEventListener("mousemove", function (e) {
             if (e.buttons & 1)
                 _this.processTool(e);
+        });
+        var toolbar = document.querySelector("div.toolbar");
+        this.tools.forEach(function (tool) {
+            var toolDiv = document.createElement("div");
+            toolDiv.classList.add("tool");
+            toolDiv.classList.toggle("active", _this.currentTool === tool);
+            toolDiv.innerHTML = "\n                <img src=\"../res/icons/" + tool.id + ".svg\">\n                <p>" + tool.name + "</p>\n            ";
+            toolDiv.addEventListener("click", function () {
+                toolbar.querySelector("div.active").classList.remove("active");
+                toolDiv.classList.add("active");
+                _this.currentTool = tool;
+            });
+            toolbar.appendChild(toolDiv);
+        });
+        var tilebar = document.querySelector("div.tileList");
+        this.availableTiles.forEach(function (tile) {
+            var tileDiv = document.createElement("div");
+            tileDiv.classList.add("tile");
+            tileDiv.classList.toggle("active", _this.currentTile === tile);
+            tileDiv.classList.toggle("collidable", tile.collidable);
+            tileDiv.innerHTML = "\n                <img src=\"../res/tiles/" + tile.id + ".png\">\n                <p>" + tile.id + "</p>\n            ";
+            tileDiv.addEventListener("click", function () {
+                tilebar.querySelector("div.active").classList.remove("active");
+                tileDiv.classList.add("active");
+                _this.currentTile = tile;
+            });
+            tilebar.appendChild(tileDiv);
         });
     };
     return Viewer;
@@ -705,7 +732,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
-viewer.setupEvents();
+viewer.setupDOM();
 viewer.loadTiles().then(function () {
     var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"]("testlevel", Array(64).fill(0).map(function (_, i) {
         var x = i % 8, y = Math.floor(i / 8);

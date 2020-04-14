@@ -137,21 +137,38 @@ main {
                 }
             }
 
-            div.tileList {
-                overflow-y: auto;
+            &.tileList {
+                flex-grow: 1;
 
-                div.tile {
-                    padding: 4px;
+                div.tileList {
+                    overflow-y: auto;
+    
+                    div.tile {
+                        padding: 4px;
+                        border-radius: 2px;
+    
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
 
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-                    p {
-                        font-size: 10pt;
-                        text-align: center;
-
-                        margin: 0;
+                        &:hover {
+                            background: #fff1;
+                        }
+            
+                        &:active {
+                            background: #fff2;
+                        }
+            
+                        &.active {
+                            background: rgb(22, 22, 22);
+                        }
+    
+                        p {
+                            font-size: 10pt;
+                            text-align: center;
+    
+                            margin: 0;
+                        }
                     }
                 }
             }

@@ -3,6 +3,7 @@ import { Tile } from "./tile"
 import { ITool } from "./tools/tool"
 import { DrawTileTool } from "./tools/drawTile"
 import { FillTileTool } from "./tools/fillTile"
+import { EraseTileTool } from "./tools/eraseTile"
 
 export class Viewer {
     public grid = true
@@ -17,7 +18,8 @@ export class Viewer {
 
     public tools: ITool[] = [
         new DrawTileTool(),
-        new FillTileTool()
+        new FillTileTool(),
+        new EraseTileTool()
     ]
     public currentTool = this.tools[0]
 

@@ -29,6 +29,14 @@ export class Level {
         )
     }
 
+    deleteTileAt(x: number, y: number) {
+        const instance = this.getTileAt(x, y)
+        if (instance)
+            this.tiles.splice(
+                this.tiles.indexOf(instance), 1
+            )
+    }
+
     setTileAt(x: number, y: number, tile: Tile) {
         const instance = this.getTileAt(x, y)
         if (instance) {

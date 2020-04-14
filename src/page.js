@@ -528,6 +528,11 @@ var Level = /** @class */ (function () {
     Level.prototype.getTileAt = function (x, y) {
         return this.tiles.find(function (t) { return t.x === x && t.y === y; });
     };
+    Level.prototype.deleteTileAt = function (x, y) {
+        var instance = this.getTileAt(x, y);
+        if (instance)
+            this.tiles.splice(this.tiles.indexOf(instance), 1);
+    };
     Level.prototype.setTileAt = function (x, y, tile) {
         var instance = this.getTileAt(x, y);
         if (instance) {
@@ -603,6 +608,64 @@ var DrawTileTool = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/editor/tools/eraseTile.ts":
+/*!***************************************!*\
+  !*** ./src/editor/tools/eraseTile.ts ***!
+  \***************************************/
+/*! exports provided: EraseTileTool */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EraseTileTool", function() { return EraseTileTool; });
+var EraseTileTool = /** @class */ (function () {
+    function EraseTileTool() {
+        this.id = "eraseTile";
+        this.name = "Erase tile";
+    }
+    EraseTileTool.prototype.process = function (context, x, y, continuous) {
+        context.level.deleteTileAt(x, y);
+        context.render();
+    };
+    return EraseTileTool;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/editor/tools/fillTile.ts":
+/*!**************************************!*\
+  !*** ./src/editor/tools/fillTile.ts ***!
+  \**************************************/
+/*! exports provided: FillTileTool */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FillTileTool", function() { return FillTileTool; });
+var FillTileTool = /** @class */ (function () {
+    function FillTileTool() {
+        this.id = "fillTile";
+        this.name = "Fill tiles";
+    }
+    FillTileTool.prototype.process = function (context, x, y, continuous) {
+        if (continuous)
+            return;
+        var levelDim = context.level.dimensions;
+        var applyFill = Array(levelDim.x).fill(0).map(function () { return Array(levelDim.y).fill(false); });
+        var referenceTile = null;
+        var referenceInstance = context.level.getTileAt(x, y);
+        if (referenceInstance)
+            referenceTile = referenceInstance.tile;
+    };
+    return FillTileTool;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/editor/viewer.ts":
 /*!******************************!*\
   !*** ./src/editor/viewer.ts ***!
@@ -615,6 +678,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Viewer", function() { return Viewer; });
 /* harmony import */ var _tile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tile */ "./src/editor/tile.ts");
 /* harmony import */ var _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools/drawTile */ "./src/editor/tools/drawTile.ts");
+/* harmony import */ var _tools_fillTile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools/fillTile */ "./src/editor/tools/fillTile.ts");
+/* harmony import */ var _tools_eraseTile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools/eraseTile */ "./src/editor/tools/eraseTile.ts");
+
+
 
 
 var Viewer = /** @class */ (function () {
@@ -628,7 +695,9 @@ var Viewer = /** @class */ (function () {
         ];
         this.currentTile = this.availableTiles[0];
         this.tools = [
-            new _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__["DrawTileTool"]()
+            new _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__["DrawTileTool"](),
+            new _tools_fillTile__WEBPACK_IMPORTED_MODULE_2__["FillTileTool"](),
+            new _tools_eraseTile__WEBPACK_IMPORTED_MODULE_3__["EraseTileTool"]()
         ];
         this.currentTool = this.tools[0];
         this.canvas = document.querySelector("main > canvas");

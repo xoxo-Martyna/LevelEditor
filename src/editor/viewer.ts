@@ -2,6 +2,7 @@ import { Level } from "./level"
 import { Tile } from "./tile"
 import { ITool } from "./tools/tool"
 import { DrawTileTool } from "./tools/drawTile"
+import { FillTileTool } from "./tools/fillTile"
 
 export class Viewer {
     public grid = true
@@ -15,7 +16,8 @@ export class Viewer {
     public currentTile = this.availableTiles[0]
 
     public tools: ITool[] = [
-        new DrawTileTool()
+        new DrawTileTool(),
+        new FillTileTool()
     ]
     public currentTool = this.tools[0]
 

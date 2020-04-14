@@ -515,6 +515,16 @@ var Level = /** @class */ (function () {
         this.id = id;
         this.tiles = tiles;
     }
+    Object.defineProperty(Level.prototype, "dimensions", {
+        get: function () {
+            return {
+                x: Math.max.apply(Math, this.tiles.map(function (i) { return i.x; })) + 1,
+                y: Math.max.apply(Math, this.tiles.map(function (i) { return i.y; })) + 1
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
     Level.prototype.getTileAt = function (x, y) {
         return this.tiles.find(function (t) { return t.x === x && t.y === y; });
     };

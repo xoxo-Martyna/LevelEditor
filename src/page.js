@@ -81,32 +81,22 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/page.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/index.ts":
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ \"electron\");\n/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);\n\r\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on(\"ready\", function () {\r\n    var win = new electron__WEBPACK_IMPORTED_MODULE_0__[\"BrowserWindow\"]({\r\n        title: \"xoxo, LevelEditor\",\r\n        width: 1280,\r\n        height: 720,\r\n        webPreferences: {\r\n            nodeIntegration: true\r\n        }\r\n    });\r\n    win.loadFile(\"index.html\");\r\n});\r\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on(\"window-all-closed\", function () {\r\n    electron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].quit();\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
-
-/***/ }),
-
-/***/ "electron":
-/*!***************************!*\
-  !*** external "electron" ***!
-  \***************************/
+/***/ "./src/page.ts":
+/*!*********************!*\
+  !*** ./src/page.ts ***!
+  \*********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"electron\");\n\n//# sourceURL=webpack:///external_%22electron%22?");
+alert("Hello!");
+
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=page.js.map

@@ -1,21 +1,50 @@
 import { Level } from "./level"
+import { Tile } from "./tile"
+import { ITool } from "./tools/tool"
+import { DrawTileTool } from "./tools/drawTile"
 
 export class Viewer {
     public grid = true
     public collisionBoxes = true
     public effectBoxes = true
 
+    public availableTiles: Tile[] = [
+        new Tile("testgrass"),
+        new Tile("testbricks", true)
+    ]
+    public currentTile = this.availableTiles[0]
+
+    public tools: ITool[] = [
+        new DrawTileTool()
+    ]
+    public currentTool = this.tools[0]
+
+    public level: Level
+
     public canvas: HTMLCanvasElement = document.querySelector(
         "main > canvas"
     )
 
-    render(level: Level) {
+    loadLevel(level: Level) {
+        this.level = level
+        this.render()
+    }
+
+    loadTiles(): Promise<void[]> {
+        return Promise.all(
+            this.availableTiles.map(
+                t => t.loadImage()
+            )
+        )
+    }
+
+    render() {
         this.canvas.width = innerWidth - 97 - 87
         this.canvas.height = innerHeight - 29
 
         const ctx = this.canvas.getContext("2d")
 
-        level.tiles.forEach(
+        this.level.tiles.forEach(
             instance => {
                 ctx.drawImage(
                     instance.tile.tileImage,
@@ -72,5 +101,33 @@ export class Viewer {
             }
             ctx.stroke()
         }
+    }
+
+    processTool(e: MouseEvent) {
+        const rect = this.canvas.getBoundingClientRect()
+
+        const x = Math.floor(
+            (e.clientX - rect.x) / 32
+        )
+        const y = Math.floor(
+            (e.clientY - rect.y) / 32
+        )
+
+        this.currentTool.process(
+            this,
+            x, y,
+            e.type === "mousemove"
+        )
+    }
+
+    setupDOM() {
+        this.canvas.addEventListener(
+            "mouseup", (e) => this.processTool(e)
+        )
+        this.canvas.addEventListener(
+            "mousemove", (e) => {
+                if (e.buttons & 1) this.processTool(e)
+            }
+        )
     }
 }

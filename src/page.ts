@@ -3,15 +3,10 @@ import { Viewer } from "./editor/viewer"
 import { Level, TileInstance } from "./editor/level"
 import { Tile } from "./editor/tile"
 
-const tiles: Tile[] = [
-    new Tile("testgrass"),
-    new Tile("testbricks", true)
-]
+const viewer = new Viewer()
+viewer.setupDOM()
 
-Promise.all(
-    tiles.map(t => t.loadImage())
-).then(() => {
-    const renderer = new Viewer()
+viewer.loadTiles().then(() => {
     const level = new Level(
         "testlevel",
         Array(64).fill(0).map(
@@ -22,16 +17,16 @@ Promise.all(
                     (
                         x === 0 || x === 7 ||
                         y === 0 || y === 7
-                    ) ? tiles[1] : tiles[0],
+                    ) ? viewer.availableTiles[1] : viewer.availableTiles[0],
                     x, y
                 )
             }
         )
     )
     
-    renderer.render(level)
-    window.addEventListener("resize", () => renderer.render(
-        level
-    ))
+    viewer.loadLevel(level)
+    window.addEventListener(
+        "resize", () => viewer.render()
+    )
 })
 

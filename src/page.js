@@ -515,8 +515,17 @@ var Level = /** @class */ (function () {
         this.id = id;
         this.tiles = tiles;
     }
-    Level.prototype.tileAt = function (x, y) {
+    Level.prototype.getTileAt = function (x, y) {
         return this.tiles.find(function (t) { return t.x === x && t.y === y; });
+    };
+    Level.prototype.setTileAt = function (x, y, tile) {
+        var instance = this.getTileAt(x, y);
+        if (instance) {
+            instance.tile = tile;
+        }
+        else {
+            this.tiles.push(new TileInstance(tile, x, y));
+        }
     };
     return Level;
 }());
@@ -558,6 +567,32 @@ var Tile = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/editor/tools/drawTile.ts":
+/*!**************************************!*\
+  !*** ./src/editor/tools/drawTile.ts ***!
+  \**************************************/
+/*! exports provided: DrawTileTool */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DrawTileTool", function() { return DrawTileTool; });
+var DrawTileTool = /** @class */ (function () {
+    function DrawTileTool() {
+        this.id = "drawTile";
+        this.name = "Draw tile";
+    }
+    DrawTileTool.prototype.process = function (context, x, y, continuous) {
+        context.level.setTileAt(x, y, context.currentTile);
+        context.render();
+    };
+    return DrawTileTool;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/editor/viewer.ts":
 /*!******************************!*\
   !*** ./src/editor/viewer.ts ***!
@@ -568,19 +603,39 @@ var Tile = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Viewer", function() { return Viewer; });
+/* harmony import */ var _tile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tile */ "./src/editor/tile.ts");
+/* harmony import */ var _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools/drawTile */ "./src/editor/tools/drawTile.ts");
+
+
 var Viewer = /** @class */ (function () {
     function Viewer() {
         this.grid = true;
         this.collisionBoxes = true;
         this.effectBoxes = true;
+        this.availableTiles = [
+            new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"]("testgrass"),
+            new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"]("testbricks", true)
+        ];
+        this.currentTile = this.availableTiles[0];
+        this.tools = [
+            new _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__["DrawTileTool"]()
+        ];
+        this.currentTool = this.tools[0];
         this.canvas = document.querySelector("main > canvas");
     }
-    Viewer.prototype.render = function (level) {
+    Viewer.prototype.loadLevel = function (level) {
+        this.level = level;
+        this.render();
+    };
+    Viewer.prototype.loadTiles = function () {
+        return Promise.all(this.availableTiles.map(function (t) { return t.loadImage(); }));
+    };
+    Viewer.prototype.render = function () {
         var _this = this;
         this.canvas.width = innerWidth - 97 - 87;
         this.canvas.height = innerHeight - 29;
         var ctx = this.canvas.getContext("2d");
-        level.tiles.forEach(function (instance) {
+        this.level.tiles.forEach(function (instance) {
             ctx.drawImage(instance.tile.tileImage, 32 * instance.x, 32 * instance.y);
             if (_this.collisionBoxes && instance.tile.collidable) {
                 ctx.beginPath();
@@ -612,6 +667,20 @@ var Viewer = /** @class */ (function () {
             ctx.stroke();
         }
     };
+    Viewer.prototype.processTool = function (e) {
+        var rect = this.canvas.getBoundingClientRect();
+        var x = Math.floor((e.clientX - rect.x) / 32);
+        var y = Math.floor((e.clientY - rect.y) / 32);
+        this.currentTool.process(this, x, y, e.type === "mousemove");
+    };
+    Viewer.prototype.setupEvents = function () {
+        var _this = this;
+        this.canvas.addEventListener("mouseup", function (e) { return _this.processTool(e); });
+        this.canvas.addEventListener("mousemove", function (e) {
+            if (e.buttons & 1)
+                _this.processTool(e);
+        });
+    };
     return Viewer;
 }());
 
@@ -632,24 +701,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_main_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _editor_viewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor/viewer */ "./src/editor/viewer.ts");
 /* harmony import */ var _editor_level__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor/level */ "./src/editor/level.ts");
-/* harmony import */ var _editor_tile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor/tile */ "./src/editor/tile.ts");
 
 
 
-
-var tiles = [
-    new _editor_tile__WEBPACK_IMPORTED_MODULE_3__["Tile"]("testgrass"),
-    new _editor_tile__WEBPACK_IMPORTED_MODULE_3__["Tile"]("testbricks", true)
-];
-Promise.all(tiles.map(function (t) { return t.loadImage(); })).then(function () {
-    var renderer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
+var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
+viewer.setupEvents();
+viewer.loadTiles().then(function () {
     var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"]("testlevel", Array(64).fill(0).map(function (_, i) {
         var x = i % 8, y = Math.floor(i / 8);
         return new _editor_level__WEBPACK_IMPORTED_MODULE_2__["TileInstance"]((x === 0 || x === 7 ||
-            y === 0 || y === 7) ? tiles[1] : tiles[0], x, y);
+            y === 0 || y === 7) ? viewer.availableTiles[1] : viewer.availableTiles[0], x, y);
     }));
-    renderer.render(level);
-    window.addEventListener("resize", function () { return renderer.render(level); });
+    viewer.loadLevel(level);
+    window.addEventListener("resize", function () { return viewer.render(); });
 });
 
 

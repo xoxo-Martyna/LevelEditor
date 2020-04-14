@@ -573,24 +573,27 @@ var Viewer = /** @class */ (function () {
         this.grid = true;
         this.collisionBoxes = true;
         this.effectBoxes = true;
+        this.canvas = document.querySelector("main > canvas");
     }
     Viewer.prototype.render = function (level) {
         var _this = this;
-        var canvas = document.querySelector("main > canvas");
-        canvas.width = innerWidth - 97 - 87;
-        canvas.height = innerHeight - 29;
-        var ctx = canvas.getContext("2d");
+        this.canvas.width = innerWidth - 97 - 87;
+        this.canvas.height = innerHeight - 29;
+        var ctx = this.canvas.getContext("2d");
         level.tiles.forEach(function (instance) {
             ctx.drawImage(instance.tile.tileImage, 32 * instance.x, 32 * instance.y);
             if (_this.collisionBoxes && instance.tile.collidable) {
-                ctx.strokeStyle = "#FF00FF";
-                ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.rect(32 * instance.x, 32 * instance.y, 32, 32);
                 ctx.moveTo(32 * instance.x, 32 * instance.y);
                 ctx.lineTo(32 * instance.x + 32, 32 * instance.y + 32);
                 ctx.moveTo(32 * instance.x + 32, 32 * instance.y);
                 ctx.lineTo(32 * instance.x, 32 * instance.y + 32);
+                ctx.strokeStyle = "#000000";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.strokeStyle = "#FF00FF";
+                ctx.lineWidth = 1;
                 ctx.stroke();
             }
         });
@@ -598,13 +601,13 @@ var Viewer = /** @class */ (function () {
             ctx.strokeStyle = "#AAAAAA50";
             ctx.lineWidth = 2;
             ctx.beginPath();
-            for (var x = 32; x < canvas.width; x += 32) {
+            for (var x = 32; x < this.canvas.width; x += 32) {
                 ctx.moveTo(x, 0);
-                ctx.lineTo(x, canvas.height);
+                ctx.lineTo(x, this.canvas.height);
             }
-            for (var y = 32; y < canvas.height; y += 32) {
+            for (var y = 32; y < this.canvas.height; y += 32) {
                 ctx.moveTo(0, y);
-                ctx.lineTo(canvas.width, y);
+                ctx.lineTo(this.canvas.width, y);
             }
             ctx.stroke();
         }

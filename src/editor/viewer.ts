@@ -24,8 +24,6 @@ export class Viewer {
                 )
 
                 if (this.collisionBoxes && instance.tile.collidable) {
-                    ctx.strokeStyle = "#FF00FF"
-                    ctx.lineWidth = 1
 
                     ctx.beginPath()
 
@@ -48,6 +46,12 @@ export class Viewer {
                         32 * instance.x, 32 * instance.y + 32
                     )
 
+                    ctx.strokeStyle = "#000000"
+                    ctx.lineWidth = 2
+                    ctx.stroke()
+
+                    ctx.strokeStyle = "#FF00FF"
+                    ctx.lineWidth = 1
                     ctx.stroke()
                 }
             }

@@ -48,6 +48,22 @@ export class Viewer {
 
         const ctx = this.canvas.getContext("2d")
 
+        ctx.clearRect(
+            0, 0, this.canvas.width, this.canvas.height
+        )
+
+        const levelDim = this.level.dimensions
+        ctx.fillStyle = "rgb(56, 56, 56)"
+        ctx.fillRect(
+            0, 0,
+            32 * levelDim.x, 32 * levelDim.y
+        )
+        ctx.fillStyle = "#FFFF00"
+        ctx.fillRect(
+            32 * levelDim.x, 32 * levelDim.y,
+            8, 8
+        )
+
         this.level.tiles.forEach(
             instance => {
                 ctx.drawImage(

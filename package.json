@@ -19,6 +19,7 @@
   "homepage": "https://github.com/xoxo-Martyna/LevelEditor#readme",
   "devDependencies": {
     "@types/node": "^13.11.1",
+    "css-loader": "^3.5.2",
     "electron": "^8.2.2",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",

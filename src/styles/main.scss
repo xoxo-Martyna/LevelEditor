@@ -1,0 +1,164 @@
+body {
+    background: rgb(34, 34, 34);
+    color: #fff;
+
+    font-family: "Segoe UI", sans-serif;
+
+    user-select: none;
+}
+
+div.tabs {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+
+    padding: 4px 8px 0px 8px;
+
+    display: flex;
+
+    button {
+        background: rgb(27, 27, 27);
+        color: #aaa;
+
+        font-family: "Segoe UI", sans-serif;
+        font-size: 10pt;
+
+        padding: 4px 12px;
+        margin: 0px 4px 0px 0px;
+        border-radius: 4px 4px 0px 0px;
+        border: none;
+        outline: none;
+
+        &.active {
+            background: rgb(56, 56, 56);
+            color: #fff;
+        }
+    }
+}
+
+main {
+    position: fixed;
+    left: 0;
+    top: 29px;
+    right: 0;
+    bottom: 0;
+
+    background: rgb(56, 56, 56);
+
+    display: flex;
+
+    div.toolbar {
+        min-width: 36px;
+
+        padding: 2px;
+        border-right: 1px solid #fff1;
+
+        overflow-y: auto;
+
+        div.separator {
+            height: 1px;
+            background: #fff1;
+
+            margin: 4px 2px;
+        }
+
+        div.tool {
+            position: relative;
+
+            font-size: 0;
+
+            padding: 2px;
+            border-radius: 2px;
+
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+
+            p {
+                color: #fff;
+
+                font-size: 9pt;
+
+                margin: 0 0 0 2px;
+            }
+
+            &:hover {
+                background: #fff1;
+            }
+
+            &:active {
+                background: #fff2;
+            }
+
+            &.active {
+                background: rgb(22, 22, 22);
+            }
+        }
+    }
+
+    aside {
+        width: 96px;
+        min-width: 96px;
+
+        border-left: 1px solid #fff1;
+
+        display: flex;
+        flex-direction: column;
+
+        section {
+            &:not(:last-child) {
+                border-bottom: 1px solid #fff1;
+            }
+
+            header {
+                font-size: 10pt;
+                font-weight: 400;
+                text-align: center;
+
+                padding: 2px;
+
+                opacity: 0.5;
+            }
+
+            div.layerViz {
+                display: flex;
+
+                label {
+                    font-size: 10pt;
+
+                    padding-left: 8px;
+
+                    flex-grow: 1;
+                }
+            }
+
+            div.tileList {
+                overflow-y: auto;
+
+                div.tile {
+                    padding: 4px;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    p {
+                        font-size: 10pt;
+                        text-align: center;
+
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    canvas {
+        flex-grow: 1;
+    }
+}

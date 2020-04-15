@@ -155,7 +155,7 @@ export class Viewer {
             (e.clientY - rect.y) / 32
         )
 
-        if (e.buttons & 1) {
+        if (e.buttons & 1 || e.type === "mouseup") {
             this.currentTool.process(
                 this,
                 x, y,

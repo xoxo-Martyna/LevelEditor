@@ -675,15 +675,35 @@ var FillTileTool = /** @class */ (function () {
         this.id = "fillTile";
         this.name = "Fill tiles";
     }
+    FillTileTool.prototype.floodFill = function (level, queue, x, y, w, h, refTile) {
+        if (x < 0 || y < 0 ||
+            x >= w || y >= h ||
+            queue.findIndex(function (t) { return t[0] === x && t[1] === y; }) !== -1)
+            return;
+        var tile = level.getTileAt(x, y);
+        if ((tile && refTile === tile.tile) ||
+            (!refTile && !tile)) {
+            queue.push([x, y]);
+            this.floodFill(level, queue, x - 1, y, w, h, refTile);
+            this.floodFill(level, queue, x + 1, y, w, h, refTile);
+            this.floodFill(level, queue, x, y - 1, w, h, refTile);
+            this.floodFill(level, queue, x, y + 1, w, h, refTile);
+        }
+    };
     FillTileTool.prototype.process = function (context, x, y, continuous) {
         if (continuous)
             return;
         var levelDim = context.level.dimensions;
-        var applyFill = Array(levelDim.x).fill(0).map(function () { return Array(levelDim.y).fill(false); });
         var referenceTile = null;
         var referenceInstance = context.level.getTileAt(x, y);
         if (referenceInstance)
             referenceTile = referenceInstance.tile;
+        var queue = [];
+        this.floodFill(context.level, queue, x, y, levelDim.x, levelDim.y, referenceTile);
+        queue.forEach(function (coords) {
+            context.level.setTileAt(coords[0], coords[1], context.currentTile);
+        });
+        context.render();
     };
     return FillTileTool;
 }());
@@ -823,7 +843,7 @@ var Viewer = /** @class */ (function () {
         var rect = this.canvas.getBoundingClientRect();
         var x = Math.floor((e.clientX - rect.x) / 32);
         var y = Math.floor((e.clientY - rect.y) / 32);
-        if (e.buttons & 1) {
+        if (e.buttons & 1 || e.type === "mouseup") {
             this.currentTool.process(this, x, y, e.type === "mousemove");
         }
         else {

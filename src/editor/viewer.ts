@@ -4,6 +4,7 @@ import { ITool } from "./tools/tool"
 import { DrawTileTool } from "./tools/drawTile"
 import { FillTileTool } from "./tools/fillTile"
 import { EraseTileTool } from "./tools/eraseTile"
+import { SetSpawnPointTool } from "./tools/setSpawnPoint"
 
 export class Viewer {
     public grid = true
@@ -19,7 +20,9 @@ export class Viewer {
     public tools: ITool[] = [
         new DrawTileTool(),
         new FillTileTool(),
-        new EraseTileTool()
+        new EraseTileTool(),
+
+        new SetSpawnPointTool()
     ]
     public currentTool = this.tools[0]
 
@@ -121,6 +124,25 @@ export class Viewer {
             }
             ctx.stroke()
         }
+
+        ctx.beginPath()
+        ctx.arc(
+            32 * this.level.spawnX + 16,
+            32 * this.level.spawnY + 10,
+            6, 0, Math.PI * 2
+        )
+        ctx.rect(
+            32 * this.level.spawnX + 8,
+            32 * this.level.spawnY + 16,
+            16, 12
+        )
+
+        ctx.strokeStyle = "#000000"
+        ctx.lineWidth = 2
+        ctx.stroke()
+
+        ctx.fillStyle = "#FFFFFF"
+        ctx.fill()
     }
 
     processTool(e: MouseEvent) {

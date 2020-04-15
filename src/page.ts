@@ -8,6 +8,7 @@ viewer.setupDOM()
 
 viewer.loadTiles().then(() => {
     const level = new Level(
+        viewer,
         "testlevel",
         Array(64).fill(0).map(
             (_, i) => {
@@ -21,8 +22,11 @@ viewer.loadTiles().then(() => {
                     x, y
                 )
             }
-        )
+        ),
+        2, 2
     )
+
+    console.log(level.fileData)
     
     viewer.loadLevel(level)
     window.addEventListener(

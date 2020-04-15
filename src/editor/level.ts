@@ -1,4 +1,5 @@
 import { Tile } from "./tile";
+import { Viewer } from "./viewer";
 
 export class TileInstance {
     constructor(
@@ -10,8 +11,11 @@ export class TileInstance {
 
 export class Level {
     constructor(
+        public context: Viewer,
         public id: string,
-        public tiles: TileInstance[] = []
+        public tiles: TileInstance[] = [],
+        public spawnX: number,
+        public spawnY: number
     ) {}
 
     get dimensions(): {
@@ -46,5 +50,43 @@ export class Level {
                 new TileInstance(tile, x, y)
             )
         }
+    }
+
+    get fileData(): string {
+        const dim = this.dimensions
+        const lines: string[] = [
+            `Dimensions ${dim.x} ${dim.y}`,
+            `SpawnPoint ${this.spawnX} ${this.spawnY}`
+        ]
+
+        const tiles: {
+            tile: Tile,
+            coords: number[]
+        }[] = this.context.availableTiles.map(
+            t => {
+                return {
+                    tile: t,
+                    coords: []
+                }
+            }
+        )
+
+
+        this.tiles.forEach(
+            instance => {
+                const tile = tiles.find(
+                    t => t.tile === instance.tile
+                )
+                tile.coords.push(instance.x, instance.y)
+            }
+        )
+
+        tiles.filter(t => t.coords.length).forEach(
+            t => lines.push(
+                `Tile ${t.tile.id} ${t.coords.join(" ")}`
+            )
+        )
+
+        return lines.join("\r\n")
     }
 }

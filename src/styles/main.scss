@@ -181,6 +181,7 @@ main {
     div.canvasContainer {
         position: relative;
 
+        overflow: hidden;
         flex-grow: 1;
         
         canvas {

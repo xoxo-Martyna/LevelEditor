@@ -10,14 +10,14 @@ viewer.loadTiles().then(() => {
     const level = new Level(
         viewer,
         "testlevel",
-        Array(64).fill(0).map(
+        Array(100).fill(0).map(
             (_, i) => {
-                const x = i % 8, y = Math.floor(i / 8)
+                const x = i % 10, y = Math.floor(i / 10)
 
                 return new TileInstance(
                     (
-                        x === 0 || x === 7 ||
-                        y === 0 || y === 7
+                        x === 0 || x === 9 ||
+                        y === 0 || y === 9
                     ) ? viewer.availableTiles[1] : viewer.availableTiles[0],
                     x, y
                 )

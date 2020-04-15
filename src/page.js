@@ -932,10 +932,10 @@ __webpack_require__.r(__webpack_exports__);
 var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
 viewer.setupDOM();
 viewer.loadTiles().then(function () {
-    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, "testlevel", Array(64).fill(0).map(function (_, i) {
-        var x = i % 8, y = Math.floor(i / 8);
-        return new _editor_level__WEBPACK_IMPORTED_MODULE_2__["TileInstance"]((x === 0 || x === 7 ||
-            y === 0 || y === 7) ? viewer.availableTiles[1] : viewer.availableTiles[0], x, y);
+    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, "testlevel", Array(100).fill(0).map(function (_, i) {
+        var x = i % 10, y = Math.floor(i / 10);
+        return new _editor_level__WEBPACK_IMPORTED_MODULE_2__["TileInstance"]((x === 0 || x === 9 ||
+            y === 0 || y === 9) ? viewer.availableTiles[1] : viewer.availableTiles[0], x, y);
     }), 2, 2);
     console.log(level.fileData);
     viewer.loadLevel(level);

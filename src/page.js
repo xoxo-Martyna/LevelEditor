@@ -731,6 +731,9 @@ var SetSpawnPointTool = /** @class */ (function () {
         var dims = context.level.dimensions;
         if (x >= dims.x || y >= dims.y)
             return;
+        var tile = context.level.getTileAt(x, y);
+        if (!tile || tile.tile.collidable)
+            return;
         context.level.spawnX = x;
         context.level.spawnY = y;
         context.render();

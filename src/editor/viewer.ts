@@ -5,17 +5,16 @@ import { DrawTileTool } from "./tools/drawTile"
 import { FillTileTool } from "./tools/fillTile"
 import { EraseTileTool } from "./tools/eraseTile"
 import { SetSpawnPointTool } from "./tools/setSpawnPoint"
+import { promisify } from "util"
+import { readdir } from "fs"
 
 export class Viewer {
     public grid = true
     public collisionBoxes = true
     public effectBoxes = true
 
-    public availableTiles: Tile[] = [
-        new Tile("testgrass"),
-        new Tile("testbricks", true)
-    ]
-    public currentTile = this.availableTiles[0]
+    public availableTiles: Tile[] = []
+    public currentTile: Tile
 
     public tools: ITool[] = [
         new DrawTileTool(),
@@ -37,12 +36,23 @@ export class Viewer {
         this.render()
     }
 
-    loadTiles(): Promise<void[]> {
-        return Promise.all(
+    async loadTiles(): Promise<void> {
+        const rd = promisify(readdir)
+        const fileList = await rd("res/tiles")
+
+        fileList.forEach(file => this.availableTiles.push(
+            new Tile(
+                file.substring(0, file.length - 4),
+                file.startsWith("w_")
+            )
+        ))
+        
+        await Promise.all(
             this.availableTiles.map(
                 t => t.loadImage()
             )
         )
+        this.currentTile = this.availableTiles[0]
     }
 
     render() {
@@ -72,7 +82,8 @@ export class Viewer {
                 ctx.drawImage(
                     instance.tile.tileImage,
                     32 * instance.x,
-                    32 * instance.y
+                    32 * instance.y,
+                    32, 32
                 )
 
                 if (this.collisionBoxes && instance.tile.collidable) {

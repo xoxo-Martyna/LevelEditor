@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\ndiv.tabs {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  padding: 4px 8px 0px 8px;\n  display: flex; }\n  div.tabs button {\n    background: #1b1b1b;\n    color: #aaa;\n    font-family: \"Segoe UI\", sans-serif;\n    font-size: 10pt;\n    padding: 4px 12px;\n    margin: 0px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    border: none;\n    outline: none; }\n    div.tabs button.active {\n      background: #383838;\n      color: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 29px;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 96px;\n    min-width: 96px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section:not(:last-child) {\n      border-bottom: 1px solid #fff1; }\n    main aside section header {\n      font-size: 10pt;\n      font-weight: 400;\n      text-align: center;\n      padding: 2px;\n      opacity: 0.5; }\n    main aside section div.layerViz {\n      display: flex; }\n      main aside section div.layerViz label {\n        font-size: 10pt;\n        padding-left: 8px;\n        flex-grow: 1; }\n    main aside section.tileList {\n      flex-grow: 1; }\n      main aside section.tileList div.tileList {\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          padding: 4px;\n          border-radius: 2px;\n          display: flex;\n          flex-direction: column;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n  main canvas {\n    background: #1b1b1b;\n    flex-grow: 1; }\n  main div.viewerCoordinates {\n    position: fixed;\n    top: 32px;\n    right: 110px;\n    background: #0008;\n    font-family: monospace;\n    text-align: right;\n    padding: 8px 16px;\n    pointer-events: none; }\n", ""]);
+exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\ndiv.tabs {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  padding: 4px 8px 0px 8px;\n  display: flex; }\n  div.tabs button {\n    background: #1b1b1b;\n    color: #aaa;\n    font-family: \"Segoe UI\", sans-serif;\n    font-size: 10pt;\n    padding: 4px 12px;\n    margin: 0px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    border: none;\n    outline: none; }\n    div.tabs button.active {\n      background: #383838;\n      color: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 29px;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 96px;\n    min-width: 96px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          padding: 4px;\n          border-radius: 2px;\n          display: flex;\n          flex-direction: column;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n  main canvas {\n    background: #1b1b1b;\n    flex-grow: 1; }\n  main div.viewerCoordinates {\n    position: fixed;\n    top: 32px;\n    right: 110px;\n    background: #0008;\n    font-family: monospace;\n    text-align: right;\n    padding: 8px 16px;\n    pointer-events: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -760,6 +760,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_fillTile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools/fillTile */ "./src/editor/tools/fillTile.ts");
 /* harmony import */ var _tools_eraseTile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools/eraseTile */ "./src/editor/tools/eraseTile.ts");
 /* harmony import */ var _tools_setSpawnPoint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tools/setSpawnPoint */ "./src/editor/tools/setSpawnPoint.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! util */ "util");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_6__);
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
 
 
 
@@ -770,11 +812,7 @@ var Viewer = /** @class */ (function () {
         this.grid = true;
         this.collisionBoxes = true;
         this.effectBoxes = true;
-        this.availableTiles = [
-            new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"]("testgrass"),
-            new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"]("testbricks", true)
-        ];
-        this.currentTile = this.availableTiles[0];
+        this.availableTiles = [];
         this.tools = [
             new _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__["DrawTileTool"](),
             new _tools_fillTile__WEBPACK_IMPORTED_MODULE_2__["FillTileTool"](),
@@ -789,7 +827,25 @@ var Viewer = /** @class */ (function () {
         this.render();
     };
     Viewer.prototype.loadTiles = function () {
-        return Promise.all(this.availableTiles.map(function (t) { return t.loadImage(); }));
+        return __awaiter(this, void 0, void 0, function () {
+            var rd, fileList;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        rd = Object(util__WEBPACK_IMPORTED_MODULE_5__["promisify"])(fs__WEBPACK_IMPORTED_MODULE_6__["readdir"]);
+                        return [4 /*yield*/, rd("res/tiles")];
+                    case 1:
+                        fileList = _a.sent();
+                        fileList.forEach(function (file) { return _this.availableTiles.push(new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"](file.substring(0, file.length - 4), file.startsWith("w_"))); });
+                        return [4 /*yield*/, Promise.all(this.availableTiles.map(function (t) { return t.loadImage(); }))];
+                    case 2:
+                        _a.sent();
+                        this.currentTile = this.availableTiles[0];
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     Viewer.prototype.render = function () {
         var _this = this;
@@ -803,7 +859,7 @@ var Viewer = /** @class */ (function () {
         ctx.fillStyle = "#FFFF00";
         ctx.fillRect(32 * levelDim.x, 32 * levelDim.y, 8, 8);
         this.level.tiles.forEach(function (instance) {
-            ctx.drawImage(instance.tile.tileImage, 32 * instance.x, 32 * instance.y);
+            ctx.drawImage(instance.tile.tileImage, 32 * instance.x, 32 * instance.y, 32, 32);
             if (_this.collisionBoxes && instance.tile.collidable) {
                 ctx.beginPath();
                 ctx.rect(32 * instance.x, 32 * instance.y, 32, 32);
@@ -930,8 +986,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
-viewer.setupDOM();
 viewer.loadTiles().then(function () {
+    viewer.setupDOM();
     var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, "testlevel", Array(100).fill(0).map(function (_, i) {
         var x = i % 10, y = Math.floor(i / 10);
         return new _editor_level__WEBPACK_IMPORTED_MODULE_2__["TileInstance"]((x === 0 || x === 9 ||
@@ -973,6 +1029,28 @@ var exported = content.locals ? content.locals : {};
 
 
 module.exports = exported;
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ "util":
+/*!***********************!*\
+  !*** external "util" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("util");
 
 /***/ })
 

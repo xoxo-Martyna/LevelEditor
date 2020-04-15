@@ -4,9 +4,10 @@ import { Level, TileInstance } from "./editor/level"
 import { Tile } from "./editor/tile"
 
 const viewer = new Viewer()
-viewer.setupDOM()
 
 viewer.loadTiles().then(() => {
+    viewer.setupDOM()
+    
     const level = new Level(
         viewer,
         "testlevel",

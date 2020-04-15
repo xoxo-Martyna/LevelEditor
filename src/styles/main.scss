@@ -111,6 +111,9 @@ main {
         flex-direction: column;
 
         section {
+            display: flex;
+            flex-direction: column;
+
             &:not(:last-child) {
                 border-bottom: 1px solid #fff1;
             }
@@ -139,9 +142,9 @@ main {
 
             &.tileList {
                 flex-grow: 1;
+                overflow-y: auto;
 
                 div.tileList {
-                    overflow-y: auto;
     
                     div.tile {
                         padding: 4px;

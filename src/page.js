@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\ndiv.tabs {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  padding: 4px 8px 0px 8px;\n  display: flex; }\n  div.tabs button {\n    background: #1b1b1b;\n    color: #aaa;\n    font-family: \"Segoe UI\", sans-serif;\n    font-size: 10pt;\n    padding: 4px 12px;\n    margin: 0px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    border: none;\n    outline: none; }\n    div.tabs button.active {\n      background: #383838;\n      color: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 29px;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 96px;\n    min-width: 96px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          padding: 4px;\n          border-radius: 2px;\n          display: flex;\n          flex-direction: column;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n  main canvas {\n    background: #1b1b1b;\n    flex-grow: 1; }\n  main div.viewerCoordinates {\n    position: fixed;\n    top: 32px;\n    right: 110px;\n    background: #0008;\n    font-family: monospace;\n    text-align: right;\n    padding: 8px 16px;\n    pointer-events: none; }\n", ""]);
+exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\ndiv.tabs {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  padding: 4px 8px 0px 8px;\n  display: flex; }\n  div.tabs button {\n    background: #1b1b1b;\n    color: #aaa;\n    font-family: \"Segoe UI\", sans-serif;\n    font-size: 10pt;\n    padding: 4px 12px;\n    margin: 0px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    border: none;\n    outline: none; }\n    div.tabs button.active {\n      background: #383838;\n      color: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 29px;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 128px;\n    min-width: 128px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          padding: 4px;\n          border-radius: 2px;\n          display: flex;\n          flex-direction: column;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n  main div.canvasContainer {\n    position: relative;\n    flex-grow: 1; }\n    main div.canvasContainer canvas {\n      background: #1b1b1b; }\n    main div.canvasContainer div.viewerCoordinates {\n      position: absolute;\n      top: 8px;\n      right: 8px;\n      background: #0008;\n      font-family: monospace;\n      text-align: right;\n      padding: 8px 16px;\n      pointer-events: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -820,7 +820,7 @@ var Viewer = /** @class */ (function () {
             new _tools_setSpawnPoint__WEBPACK_IMPORTED_MODULE_4__["SetSpawnPointTool"]()
         ];
         this.currentTool = this.tools[0];
-        this.canvas = document.querySelector("main > canvas");
+        this.canvas = document.querySelector("canvas");
     }
     Viewer.prototype.loadLevel = function (level) {
         this.level = level;
@@ -828,8 +828,7 @@ var Viewer = /** @class */ (function () {
     };
     Viewer.prototype.loadTiles = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var rd, fileList;
-            var _this = this;
+            var rd, fileList, _i, fileList_1, file;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -837,7 +836,15 @@ var Viewer = /** @class */ (function () {
                         return [4 /*yield*/, rd("res/tiles")];
                     case 1:
                         fileList = _a.sent();
-                        fileList.forEach(function (file) { return _this.availableTiles.push(new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"](file.substring(0, file.length - 4), file.startsWith("w_"))); });
+                        for (_i = 0, fileList_1 = fileList; _i < fileList_1.length; _i++) {
+                            file = fileList_1[_i];
+                            try {
+                                this.availableTiles.push(new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"](file.substring(0, file.length - 4), file.startsWith("w_")));
+                            }
+                            catch (e) {
+                                console.log("Oops!");
+                            }
+                        }
                         return [4 /*yield*/, Promise.all(this.availableTiles.map(function (t) { return t.loadImage(); }))];
                     case 2:
                         _a.sent();
@@ -849,8 +856,9 @@ var Viewer = /** @class */ (function () {
     };
     Viewer.prototype.render = function () {
         var _this = this;
-        this.canvas.width = innerWidth - 97 - 87;
-        this.canvas.height = innerHeight - 29;
+        var rect = document.querySelector("div.canvasContainer").getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
         var ctx = this.canvas.getContext("2d");
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         var levelDim = this.level.dimensions;
@@ -993,9 +1001,11 @@ viewer.loadTiles().then(function () {
         return new _editor_level__WEBPACK_IMPORTED_MODULE_2__["TileInstance"]((x === 0 || x === 9 ||
             y === 0 || y === 9) ? viewer.availableTiles[1] : viewer.availableTiles[0], x, y);
     }), 2, 2);
-    console.log(level.fileData);
     viewer.loadLevel(level);
     window.addEventListener("resize", function () { return viewer.render(); });
+    window.genLevel = function () {
+        return level.fileData;
+    };
 });
 
 

@@ -28,7 +28,7 @@ export class Viewer {
     public level: Level
 
     public canvas: HTMLCanvasElement = document.querySelector(
-        "main > canvas"
+        "canvas"
     )
 
     loadLevel(level: Level) {
@@ -40,12 +40,18 @@ export class Viewer {
         const rd = promisify(readdir)
         const fileList = await rd("res/tiles")
 
-        fileList.forEach(file => this.availableTiles.push(
-            new Tile(
-                file.substring(0, file.length - 4),
-                file.startsWith("w_")
-            )
-        ))
+        for (const file of fileList) {
+            try {
+                this.availableTiles.push(
+                    new Tile(
+                        file.substring(0, file.length - 4),
+                        file.startsWith("w_")
+                    )
+                )
+            } catch(e) {
+                console.log("Oops!")
+            }
+        }
         
         await Promise.all(
             this.availableTiles.map(
@@ -56,8 +62,9 @@ export class Viewer {
     }
 
     render() {
-        this.canvas.width = innerWidth - 97 - 87
-        this.canvas.height = innerHeight - 29
+        const rect = document.querySelector("div.canvasContainer").getBoundingClientRect()
+        this.canvas.width = rect.width
+        this.canvas.height = rect.height
 
         const ctx = this.canvas.getContext("2d")
 

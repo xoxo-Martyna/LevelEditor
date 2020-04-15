@@ -7,7 +7,7 @@ const viewer = new Viewer()
 
 viewer.loadTiles().then(() => {
     viewer.setupDOM()
-    
+
     const level = new Level(
         viewer,
         "testlevel",
@@ -27,11 +27,13 @@ viewer.loadTiles().then(() => {
         2, 2
     )
 
-    console.log(level.fileData)
-    
     viewer.loadLevel(level)
     window.addEventListener(
         "resize", () => viewer.render()
-    )
+    );
+
+    (window as any).genLevel = () => {
+        return level.fileData
+    }
 })
 

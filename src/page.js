@@ -990,9 +990,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_main_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _editor_viewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor/viewer */ "./src/editor/viewer.ts");
 /* harmony import */ var _editor_level__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor/level */ "./src/editor/level.ts");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
+
+var _a = __webpack_require__(/*! electron */ "electron").remote, Menu = _a.Menu, dialog = _a.dialog;
 var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
 viewer.loadTiles().then(function () {
     viewer.setupDOM();
@@ -1007,6 +1011,33 @@ viewer.loadTiles().then(function () {
         return level.fileData;
     };
 });
+var menu = Menu.buildFromTemplate([
+    {
+        type: "submenu",
+        label: "File",
+        submenu: [
+            {
+                label: "Save",
+                click: function () {
+                    dialog.showSaveDialog({
+                        filters: [
+                            {
+                                name: "xoxo Level",
+                                extensions: ["xoxo"]
+                            }
+                        ]
+                    }).then(function (data) {
+                        if (data.canceled)
+                            return;
+                        Object(fs__WEBPACK_IMPORTED_MODULE_3__["writeFileSync"])(data.filePath, viewer.level.fileData, "utf-8");
+                    });
+                }
+            }
+        ]
+    }
+]);
+console.log(Menu);
+Menu.setApplicationMenu(menu);
 
 
 /***/ }),
@@ -1039,6 +1070,17 @@ var exported = content.locals ? content.locals : {};
 
 
 module.exports = exported;
+
+/***/ }),
+
+/***/ "electron":
+/*!***************************!*\
+  !*** external "electron" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("electron");
 
 /***/ }),
 

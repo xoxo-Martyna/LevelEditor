@@ -2,6 +2,9 @@ import "./styles/main.scss"
 import { Viewer } from "./editor/viewer"
 import { Level, TileInstance } from "./editor/level"
 import { Tile } from "./editor/tile"
+import { writeFileSync } from "fs"
+
+const { Menu, dialog } = require("electron").remote
 
 const viewer = new Viewer()
 
@@ -37,3 +40,38 @@ viewer.loadTiles().then(() => {
     }
 })
 
+const menu = Menu.buildFromTemplate(
+    [
+        {
+            type: "submenu",
+            label: "File",
+            submenu: [
+                {
+                    label: "Save",
+                    click: () => {
+                        dialog.showSaveDialog(
+                            {
+                                filters: [
+                                    {
+                                        name: "xoxo Level",
+                                        extensions: ["xoxo"]
+                                    }
+                                ]
+                            }
+                        ).then((data: any) => {
+                            if (data.canceled) return
+
+                            writeFileSync(
+                                data.filePath,
+                                viewer.level.fileData,
+                                "utf-8"
+                            )
+                        })
+                    }
+                }
+            ]
+        }
+    ]
+)
+
+Menu.setApplicationMenu(menu)

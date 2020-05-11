@@ -7,40 +7,10 @@ body {
     user-select: none;
 }
 
-div.tabs {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-
-    padding: 4px 8px 0px 8px;
-
-    display: flex;
-
-    button {
-        background: rgb(27, 27, 27);
-        color: #aaa;
-
-        font-family: "Segoe UI", sans-serif;
-        font-size: 10pt;
-
-        padding: 4px 12px;
-        margin: 0px 4px 0px 0px;
-        border-radius: 4px 4px 0px 0px;
-        border: none;
-        outline: none;
-
-        &.active {
-            background: rgb(56, 56, 56);
-            color: #fff;
-        }
-    }
-}
-
 main {
     position: fixed;
     left: 0;
-    top: 29px;
+    top: 0;
     right: 0;
     bottom: 0;
 

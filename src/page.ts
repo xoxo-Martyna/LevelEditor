@@ -13,20 +13,7 @@ viewer.loadTiles().then(() => {
 
     const level = new Level(
         viewer,
-        "testlevel",
-        Array(100).fill(0).map(
-            (_, i) => {
-                const x = i % 10, y = Math.floor(i / 10)
-
-                return new TileInstance(
-                    (
-                        x === 0 || x === 9 ||
-                        y === 0 || y === 9
-                    ) ? viewer.availableTiles[1] : viewer.availableTiles[0],
-                    x, y
-                )
-            }
-        ),
+        [],
         2, 2
     )
 
@@ -47,14 +34,14 @@ const menu = Menu.buildFromTemplate(
             label: "File",
             submenu: [
                 {
-                    label: "Save",
+                    label: "Save project",
                     click: () => {
                         dialog.showSaveDialog(
                             {
                                 filters: [
                                     {
-                                        name: "xoxo Level",
-                                        extensions: ["xoxo"]
+                                        name: "xoxo-Editor Project",
+                                        extensions: ["xexe"]
                                     }
                                 ]
                             }

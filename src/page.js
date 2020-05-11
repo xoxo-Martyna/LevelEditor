@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\ndiv.tabs {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  padding: 4px 8px 0px 8px;\n  display: flex; }\n  div.tabs button {\n    background: #1b1b1b;\n    color: #aaa;\n    font-family: \"Segoe UI\", sans-serif;\n    font-size: 10pt;\n    padding: 4px 12px;\n    margin: 0px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    border: none;\n    outline: none; }\n    div.tabs button.active {\n      background: #383838;\n      color: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 29px;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 250px;\n    min-width: 250px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          position: relative;\n          padding: 4px 8px;\n          border-radius: 2px;\n          display: flex;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile img {\n            width: 32px;\n            height: 32px;\n            margin-right: 4px; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n          main aside section.tileList div.tileList div.tile.floor::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #08f;\n            color: #000;\n            content: \"Floor\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.wall::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: magenta;\n            color: #000;\n            content: \"Wall\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n  main div.canvasContainer {\n    position: relative;\n    overflow: hidden;\n    flex-grow: 1; }\n    main div.canvasContainer canvas {\n      background: #1b1b1b; }\n    main div.canvasContainer div.viewerCoordinates {\n      position: absolute;\n      top: 8px;\n      right: 8px;\n      background: #0008;\n      font-family: monospace;\n      text-align: right;\n      padding: 8px 16px;\n      pointer-events: none; }\n", ""]);
+exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 250px;\n    min-width: 250px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          position: relative;\n          padding: 4px 8px;\n          border-radius: 2px;\n          display: flex;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile img {\n            width: 32px;\n            height: 32px;\n            margin-right: 4px; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n          main aside section.tileList div.tileList div.tile.floor::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #08f;\n            color: #000;\n            content: \"Floor\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.wall::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: magenta;\n            color: #000;\n            content: \"Wall\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n  main div.canvasContainer {\n    position: relative;\n    overflow: hidden;\n    flex-grow: 1; }\n    main div.canvasContainer canvas {\n      background: #1b1b1b; }\n    main div.canvasContainer div.viewerCoordinates {\n      position: absolute;\n      top: 8px;\n      right: 8px;\n      background: #0008;\n      font-family: monospace;\n      text-align: right;\n      padding: 8px 16px;\n      pointer-events: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -510,19 +510,41 @@ var TileInstance = /** @class */ (function () {
 }());
 
 var Level = /** @class */ (function () {
-    function Level(context, id, tiles, spawnX, spawnY) {
+    function Level(context, tiles, spawnX, spawnY) {
         if (tiles === void 0) { tiles = []; }
         this.context = context;
-        this.id = id;
         this.tiles = tiles;
         this.spawnX = spawnX;
         this.spawnY = spawnY;
     }
+    Object.defineProperty(Level.prototype, "slices", {
+        get: function () {
+            var sliceStrings = [
+                "0,0" // There's always the top-left slice
+            ];
+            this.tiles.forEach(function (tile) {
+                var sliceString = Math.floor(tile.x / 10) + "," + Math.floor(tile.y / 10);
+                if (!sliceStrings.includes(sliceString))
+                    sliceStrings.push(sliceString);
+            });
+            return sliceStrings.map(function (sliceStr) {
+                var split = sliceStr.split(",");
+                return {
+                    x: +split[0],
+                    y: +split[1]
+                };
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Level.prototype, "dimensions", {
         get: function () {
+            var width = Math.max.apply(Math, this.tiles.map(function (i) { return i.x; })) + 1;
+            var height = Math.max.apply(Math, this.tiles.map(function (i) { return i.y; })) + 1;
             return {
-                x: Math.max.apply(Math, this.tiles.map(function (i) { return i.x; })) + 1,
-                y: Math.max.apply(Math, this.tiles.map(function (i) { return i.y; })) + 1
+                x: Math.ceil(width / 10) * 10,
+                y: Math.ceil(height / 10) * 10,
             };
         },
         enumerable: true,
@@ -547,23 +569,19 @@ var Level = /** @class */ (function () {
     };
     Object.defineProperty(Level.prototype, "fileData", {
         get: function () {
-            var dim = this.dimensions;
-            var lines = [
-                "Dimensions " + dim.x + " " + dim.y,
-                "SpawnPoint " + this.spawnX + " " + this.spawnY
-            ];
-            var tiles = this.context.availableTiles.map(function (t) {
-                return {
-                    tile: t,
-                    coords: []
-                };
+            return JSON.stringify({
+                spawn: {
+                    x: this.spawnX,
+                    y: this.spawnY
+                },
+                tiles: this.tiles.map(function (tile) {
+                    return {
+                        x: tile.x,
+                        y: tile.y,
+                        id: tile.tile.id
+                    };
+                })
             });
-            this.tiles.forEach(function (instance) {
-                var tile = tiles.find(function (t) { return t.tile === instance.tile; });
-                tile.coords.push(instance.x, instance.y);
-            });
-            tiles.filter(function (t) { return t.coords.length; }).forEach(function (t) { return lines.push("Tile " + t.tile.id + " " + t.coords.join(" ")); });
-            return lines.join("\r\n");
         },
         enumerable: true,
         configurable: true
@@ -860,11 +878,11 @@ var Viewer = /** @class */ (function () {
         this.canvas.height = rect.height;
         var ctx = this.canvas.getContext("2d");
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        var levelDim = this.level.dimensions;
-        ctx.fillStyle = "rgb(56, 56, 56)";
-        ctx.fillRect(0, 0, 32 * levelDim.x, 32 * levelDim.y);
-        ctx.fillStyle = "#FFFF00";
-        ctx.fillRect(32 * levelDim.x, 32 * levelDim.y, 8, 8);
+        var levelSlices = this.level.slices;
+        levelSlices.forEach(function (slice) {
+            ctx.fillStyle = "rgb(56, 56, 56)";
+            ctx.fillRect(320 * slice.x, 320 * slice.y, 320, 320);
+        });
         this.level.tiles.forEach(function (instance) {
             ctx.drawImage(instance.tile.tileImage, 32 * instance.x, 32 * instance.y, 32, 32);
             if (_this.collisionBoxes && instance.tile.collidable) {
@@ -896,6 +914,14 @@ var Viewer = /** @class */ (function () {
             }
             ctx.stroke();
         }
+        levelSlices.forEach(function (slice) {
+            ctx.fillStyle = "#fff";
+            ctx.font = "400 13px";
+            ctx.fillText("[" + slice.x + ", " + slice.y + "]", 320 * slice.x + 8, 320 * slice.y + 20);
+            ctx.strokeStyle = "#FFFF00";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(320 * slice.x, 320 * slice.y, 320, 320);
+        });
         ctx.beginPath();
         ctx.arc(32 * this.level.spawnX + 16, 32 * this.level.spawnY + 10, 6, 0, Math.PI * 2);
         ctx.rect(32 * this.level.spawnX + 8, 32 * this.level.spawnY + 16, 16, 12);
@@ -917,7 +943,7 @@ var Viewer = /** @class */ (function () {
             var tileId = "N/A";
             if (tile)
                 tileId = tile.tile.id;
-            document.querySelector("div.viewerCoordinates").innerHTML = "\n                " + tileId + "<br>\n                X: " + x + "<br>\n                Y: " + y + "\n            ";
+            document.querySelector("div.viewerCoordinates").innerHTML = "\n                " + tileId + "<br>\n                X: " + x + "<br>\n                Y: " + y + "<br>\n                Sublevel: " + Math.floor(x / 10) + ", " + Math.floor(y / 10) + "\n            ";
         }
     };
     Viewer.prototype.setupDOM = function () {
@@ -995,11 +1021,7 @@ var _a = __webpack_require__(/*! electron */ "electron").remote, Menu = _a.Menu,
 var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
 viewer.loadTiles().then(function () {
     viewer.setupDOM();
-    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, "testlevel", Array(100).fill(0).map(function (_, i) {
-        var x = i % 10, y = Math.floor(i / 10);
-        return new _editor_level__WEBPACK_IMPORTED_MODULE_2__["TileInstance"]((x === 0 || x === 9 ||
-            y === 0 || y === 9) ? viewer.availableTiles[1] : viewer.availableTiles[0], x, y);
-    }), 2, 2);
+    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, [], 2, 2);
     viewer.loadLevel(level);
     window.addEventListener("resize", function () { return viewer.render(); });
     window.genLevel = function () {
@@ -1012,13 +1034,13 @@ var menu = Menu.buildFromTemplate([
         label: "File",
         submenu: [
             {
-                label: "Save",
+                label: "Save project",
                 click: function () {
                     dialog.showSaveDialog({
                         filters: [
                             {
-                                name: "xoxo Level",
-                                extensions: ["xoxo"]
+                                name: "xoxo-Editor Project",
+                                extensions: ["xexe"]
                             }
                         ]
                     }).then(function (data) {

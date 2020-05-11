@@ -12,18 +12,52 @@ export class TileInstance {
 export class Level {
     constructor(
         public context: Viewer,
-        public id: string,
         public tiles: TileInstance[] = [],
         public spawnX: number,
         public spawnY: number
     ) {}
 
+    get slices(): {
+        x: number, y: number
+    }[] {
+        const sliceStrings: string[] = [
+            "0,0" // There's always the top-left slice
+        ]
+
+        this.tiles.forEach(
+            tile => {
+                const sliceString = `${
+                    Math.floor(tile.x / 10)
+                },${
+                    Math.floor(tile.y / 10)
+                }`
+
+                if (!sliceStrings.includes(sliceString))
+                    sliceStrings.push(sliceString)
+            }
+        )
+
+        return sliceStrings.map(
+            sliceStr => {
+                const split = sliceStr.split(",")
+
+                return {
+                    x: +split[0],
+                    y: +split[1]
+                }
+            }
+        )
+    }
+
     get dimensions(): {
         x: number, y: number
     } {
+        const width = Math.max(...this.tiles.map(i => i.x)) + 1
+        const height = Math.max(...this.tiles.map(i => i.y)) + 1
+
         return {
-            x: Math.max(...this.tiles.map(i => i.x)) + 1,
-            y: Math.max(...this.tiles.map(i => i.y)) + 1
+            x: Math.ceil(width / 10) * 10,
+            y: Math.ceil(height / 10) * 10,
         }
     }
 
@@ -53,40 +87,22 @@ export class Level {
     }
 
     get fileData(): string {
-        const dim = this.dimensions
-        const lines: string[] = [
-            `Dimensions ${dim.x} ${dim.y}`,
-            `SpawnPoint ${this.spawnX} ${this.spawnY}`
-        ]
-
-        const tiles: {
-            tile: Tile,
-            coords: number[]
-        }[] = this.context.availableTiles.map(
-            t => {
-                return {
-                    tile: t,
-                    coords: []
-                }
-            }
-        )
-
-
-        this.tiles.forEach(
-            instance => {
-                const tile = tiles.find(
-                    t => t.tile === instance.tile
+        return JSON.stringify(
+            {
+                spawn: {
+                    x: this.spawnX,
+                    y: this.spawnY
+                },
+                tiles: this.tiles.map(
+                    tile => {
+                        return {
+                            x: tile.x,
+                            y: tile.y,
+                            id: tile.tile.id
+                        }
+                    }
                 )
-                tile.coords.push(instance.x, instance.y)
             }
         )
-
-        tiles.filter(t => t.coords.length).forEach(
-            t => lines.push(
-                `Tile ${t.tile.id} ${t.coords.join(" ")}`
-            )
-        )
-
-        return lines.join("\r\n")
     }
 }

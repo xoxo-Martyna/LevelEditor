@@ -71,18 +71,18 @@ export class Viewer {
             0, 0, this.canvas.width, this.canvas.height
         )
 
-        const levelDim = this.level.dimensions
-        ctx.fillStyle = "rgb(56, 56, 56)"
-        ctx.fillRect(
-            0, 0,
-            32 * levelDim.x, 32 * levelDim.y
-        )
-        ctx.fillStyle = "#FFFF00"
-        ctx.fillRect(
-            32 * levelDim.x, 32 * levelDim.y,
-            8, 8
-        )
+        const levelSlices = this.level.slices
 
+        levelSlices.forEach(
+            slice => {
+                ctx.fillStyle = "rgb(56, 56, 56)"
+                ctx.fillRect(
+                    320 * slice.x, 320 * slice.y,
+                    320, 320
+                )
+            }
+        )
+        
         this.level.tiles.forEach(
             instance => {
                 ctx.drawImage(
@@ -142,6 +142,25 @@ export class Viewer {
             ctx.stroke()
         }
 
+        levelSlices.forEach(
+            slice => {
+                ctx.fillStyle = "#fff"
+                ctx.font = "400 13px"
+                ctx.fillText(
+                    `[${slice.x}, ${slice.y}]`,
+                    320 * slice.x + 8, 320 * slice.y + 20
+                )
+
+                
+                ctx.strokeStyle = "#FFFF00"
+                ctx.lineWidth = 2
+                ctx.strokeRect(
+                    320 * slice.x, 320 * slice.y,
+                    320, 320
+                )
+            }
+        )
+
         ctx.beginPath()
         ctx.arc(
             32 * this.level.spawnX + 16,
@@ -188,7 +207,8 @@ export class Viewer {
             ).innerHTML = `
                 ${tileId}<br>
                 X: ${x}<br>
-                Y: ${y}
+                Y: ${y}<br>
+                Sublevel: ${Math.floor(x / 10)}, ${Math.floor(y / 10)}
             `
         }
     }

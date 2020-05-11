@@ -11,7 +11,6 @@ import { readdir } from "fs"
 export class Viewer {
     public grid = true
     public collisionBoxes = true
-    public effectBoxes = true
 
     public availableTiles: Tile[] = []
     public currentTile: Tile
@@ -230,7 +229,9 @@ export class Viewer {
             const tileDiv = document.createElement("div")
             tileDiv.classList.add("tile")
             tileDiv.classList.toggle("active", this.currentTile === tile)
-            tileDiv.classList.toggle("collidable", tile.collidable)
+
+            tileDiv.classList.toggle("floor", tile.id.startsWith("f_"))
+            tileDiv.classList.toggle("wall", tile.id.startsWith("w_"))
 
             tileDiv.innerHTML = `
                 <img src="../res/tiles/${tile.id}.png">
@@ -257,12 +258,6 @@ export class Viewer {
             const input = e.target as HTMLInputElement
 
             this.collisionBoxes = input.checked
-            this.render()
-        })
-        document.querySelector("input#showFX").addEventListener("input", (e) => {
-            const input = e.target as HTMLInputElement
-
-            this.effectBoxes = input.checked
             this.render()
         })
     }

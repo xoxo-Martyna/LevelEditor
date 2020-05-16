@@ -2,7 +2,7 @@ import "./styles/main.scss"
 import { Viewer } from "./editor/viewer"
 import { Level, TileInstance } from "./editor/level"
 import { Tile } from "./editor/tile"
-import { writeFileSync } from "fs"
+import { writeFileSync, readFileSync } from "fs"
 
 const { Menu, dialog } = require("electron").remote
 
@@ -47,13 +47,14 @@ const menu = Menu.buildFromTemplate(
                             }
                         ).then((data: any) => {
                             if (data.canceled) return
-                            console.log(data)
-
-                            // writeFileSync(
-                            //     data.filePath,
-                            //     viewer.level.fileData,
-                            //     "utf-8"
-                            // )
+                            
+                            const level = Level.fromFileData(
+                                viewer,
+                                readFileSync(
+                                    data.filePaths[0], "utf-8"
+                                )
+                            )
+                            viewer.loadLevel(level)
                         })
                     }
                 },

@@ -131,9 +131,17 @@ export class Level {
                 return new TileInstance(tile, tilespec.x, tilespec.y)
             }
         )
+        const items = json.items.map(
+            (itemspec: any) => {
+                const item = context.availableItems.find(i => i.id === itemspec.id)
+
+                return new ItemInstance(item, itemspec.x, itemspec.y)
+            }
+        )
+        // const items
 
         return new Level(
-            context, tiles, [],
+            context, tiles, items,
             json.spawn.x, json.spawn.y
         )
     }
@@ -151,6 +159,15 @@ export class Level {
                             x: tile.x,
                             y: tile.y,
                             id: tile.tile.id
+                        }
+                    }
+                ),
+                items: this.items.map(
+                    item => {
+                        return {
+                            x: item.x,
+                            y: item.y,
+                            id: item.item.id
                         }
                     }
                 )

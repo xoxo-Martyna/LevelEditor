@@ -644,7 +644,12 @@ var Level = /** @class */ (function () {
             var tile = context.availableTiles.find(function (t) { return t.id === tilespec.id; });
             return new TileInstance(tile, tilespec.x, tilespec.y);
         });
-        return new Level(context, tiles, [], json.spawn.x, json.spawn.y);
+        var items = json.items.map(function (itemspec) {
+            var item = context.availableItems.find(function (i) { return i.id === itemspec.id; });
+            return new ItemInstance(item, itemspec.x, itemspec.y);
+        });
+        // const items
+        return new Level(context, tiles, items, json.spawn.x, json.spawn.y);
     };
     Object.defineProperty(Level.prototype, "fileData", {
         get: function () {
@@ -658,6 +663,13 @@ var Level = /** @class */ (function () {
                         x: tile.x,
                         y: tile.y,
                         id: tile.tile.id
+                    };
+                }),
+                items: this.items.map(function (item) {
+                    return {
+                        x: item.x,
+                        y: item.y,
+                        id: item.item.id
                     };
                 })
             });
@@ -1358,12 +1370,8 @@ var menu = Menu.buildFromTemplate([
                     }).then(function (data) {
                         if (data.canceled)
                             return;
-                        console.log(data);
-                        // writeFileSync(
-                        //     data.filePath,
-                        //     viewer.level.fileData,
-                        //     "utf-8"
-                        // )
+                        var level = _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"].fromFileData(viewer, Object(fs__WEBPACK_IMPORTED_MODULE_3__["readFileSync"])(data.filePaths[0], "utf-8"));
+                        viewer.loadLevel(level);
                     });
                 }
             },

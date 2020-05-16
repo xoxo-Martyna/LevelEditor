@@ -1,5 +1,6 @@
 import { Tile } from "./tile";
 import { Viewer } from "./viewer";
+import { Item } from "./item";
 
 export class TileInstance {
     constructor(
@@ -9,10 +10,19 @@ export class TileInstance {
     ) {}
 }
 
+export class ItemInstance {
+    constructor(
+        public item: Item,
+        public x: number,
+        public y: number
+    ) {}
+}
+
 export class Level {
     constructor(
         public context: Viewer,
         public tiles: TileInstance[] = [],
+        public items: ItemInstance[] = [],
         public spawnX: number,
         public spawnY: number
     ) {}
@@ -61,6 +71,31 @@ export class Level {
         }
     }
 
+    getItemAt(x: number, y: number): ItemInstance {
+        return this.items.find(
+            t => t.x === x && t.y === y
+        )
+    }
+
+    deleteItemAt(x: number, y: number) {
+        const instance = this.getItemAt(x, y)
+        if (instance)
+            this.items.splice(
+                this.items.indexOf(instance), 1
+            )
+    }
+
+    setItemAt(x: number, y: number, item: Item) {
+        const instance = this.getItemAt(x, y)
+        if (instance) {
+            instance.item = item
+        } else {
+            this.items.push(
+                new ItemInstance(item, x, y)
+            )
+        }
+    }
+
     getTileAt(x: number, y: number): TileInstance {
         return this.tiles.find(
             t => t.x === x && t.y === y
@@ -84,6 +119,23 @@ export class Level {
                 new TileInstance(tile, x, y)
             )
         }
+    }
+
+    static fromFileData(context: Viewer, data: string) {
+        const json = JSON.parse(data)
+
+        const tiles = json.tiles.map(
+            (tilespec: any) => {
+                const tile = context.availableTiles.find(t => t.id === tilespec.id)
+
+                return new TileInstance(tile, tilespec.x, tilespec.y)
+            }
+        )
+
+        return new Level(
+            context, tiles, [],
+            json.spawn.x, json.spawn.y
+        )
     }
 
     get fileData(): string {

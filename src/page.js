@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 250px;\n    min-width: 250px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList div.tile {\n          position: relative;\n          padding: 4px 8px;\n          border-radius: 2px;\n          display: flex;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile img {\n            width: 32px;\n            height: 32px;\n            margin-right: 4px; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n          main aside section.tileList div.tileList div.tile.floor::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #08f;\n            color: #000;\n            content: \"Floor\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.wall::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: magenta;\n            color: #000;\n            content: \"Wall\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n  main div.canvasContainer {\n    position: relative;\n    overflow: hidden;\n    flex-grow: 1; }\n    main div.canvasContainer canvas {\n      background: #1b1b1b; }\n    main div.canvasContainer div.viewerCoordinates {\n      position: absolute;\n      top: 8px;\n      right: 8px;\n      background: #0008;\n      font-family: monospace;\n      text-align: right;\n      padding: 8px 16px;\n      pointer-events: none; }\n", ""]);
+exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 250px;\n    min-width: 250px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList:not(.visible) {\n          display: none; }\n        main aside section.tileList div.tileList div.tile {\n          position: relative;\n          padding: 4px 8px;\n          border-radius: 2px;\n          display: flex;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile img {\n            width: 32px;\n            height: 32px;\n            margin-right: 4px; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n          main aside section.tileList div.tileList div.tile.floor::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #08f;\n            color: #000;\n            content: \"Floor\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.wall::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: magenta;\n            color: #000;\n            content: \"Wall\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.attack::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #f55;\n            color: #000;\n            content: \"Attack\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.defense::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #55f;\n            color: #000;\n            content: \"Defense\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.health::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #2f6;\n            color: #000;\n            content: \"Health\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n  main div.canvasContainer {\n    position: relative;\n    overflow: hidden;\n    flex-grow: 1; }\n    main div.canvasContainer canvas {\n      background: #1b1b1b; }\n    main div.canvasContainer div.viewerCoordinates {\n      position: absolute;\n      top: 8px;\n      right: 8px;\n      background: #0008;\n      font-family: monospace;\n      text-align: right;\n      padding: 8px 16px;\n      pointer-events: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -489,16 +489,59 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./src/editor/item.ts":
+/*!****************************!*\
+  !*** ./src/editor/item.ts ***!
+  \****************************/
+/*! exports provided: ItemType, Item */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemType", function() { return ItemType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Item", function() { return Item; });
+var ItemType;
+(function (ItemType) {
+    ItemType["attack"] = "attack";
+    ItemType["health"] = "health";
+    ItemType["defense"] = "defense";
+})(ItemType || (ItemType = {}));
+var Item = /** @class */ (function () {
+    function Item(id, imageId, name, type, points) {
+        this.id = id;
+        this.imageId = imageId;
+        this.name = name;
+        this.type = type;
+        this.points = points;
+    }
+    Item.prototype.loadImage = function () {
+        var _this = this;
+        this.itemImage = new Image();
+        return new Promise(function (resolve, reject) {
+            _this.itemImage.addEventListener("load", function () {
+                resolve();
+            });
+            _this.itemImage.src = "../res/items/" + _this.imageId + ".png";
+        });
+    };
+    return Item;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/editor/level.ts":
 /*!*****************************!*\
   !*** ./src/editor/level.ts ***!
   \*****************************/
-/*! exports provided: TileInstance, Level */
+/*! exports provided: TileInstance, ItemInstance, Level */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TileInstance", function() { return TileInstance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemInstance", function() { return ItemInstance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Level", function() { return Level; });
 var TileInstance = /** @class */ (function () {
     function TileInstance(tile, x, y) {
@@ -509,11 +552,22 @@ var TileInstance = /** @class */ (function () {
     return TileInstance;
 }());
 
+var ItemInstance = /** @class */ (function () {
+    function ItemInstance(item, x, y) {
+        this.item = item;
+        this.x = x;
+        this.y = y;
+    }
+    return ItemInstance;
+}());
+
 var Level = /** @class */ (function () {
-    function Level(context, tiles, spawnX, spawnY) {
+    function Level(context, tiles, items, spawnX, spawnY) {
         if (tiles === void 0) { tiles = []; }
+        if (items === void 0) { items = []; }
         this.context = context;
         this.tiles = tiles;
+        this.items = items;
         this.spawnX = spawnX;
         this.spawnY = spawnY;
     }
@@ -550,6 +604,23 @@ var Level = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Level.prototype.getItemAt = function (x, y) {
+        return this.items.find(function (t) { return t.x === x && t.y === y; });
+    };
+    Level.prototype.deleteItemAt = function (x, y) {
+        var instance = this.getItemAt(x, y);
+        if (instance)
+            this.items.splice(this.items.indexOf(instance), 1);
+    };
+    Level.prototype.setItemAt = function (x, y, item) {
+        var instance = this.getItemAt(x, y);
+        if (instance) {
+            instance.item = item;
+        }
+        else {
+            this.items.push(new ItemInstance(item, x, y));
+        }
+    };
     Level.prototype.getTileAt = function (x, y) {
         return this.tiles.find(function (t) { return t.x === x && t.y === y; });
     };
@@ -566,6 +637,14 @@ var Level = /** @class */ (function () {
         else {
             this.tiles.push(new TileInstance(tile, x, y));
         }
+    };
+    Level.fromFileData = function (context, data) {
+        var json = JSON.parse(data);
+        var tiles = json.tiles.map(function (tilespec) {
+            var tile = context.availableTiles.find(function (t) { return t.id === tilespec.id; });
+            return new TileInstance(tile, tilespec.x, tilespec.y);
+        });
+        return new Level(context, tiles, [], json.spawn.x, json.spawn.y);
     };
     Object.defineProperty(Level.prototype, "fileData", {
         get: function () {
@@ -626,6 +705,35 @@ var Tile = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/editor/tools/addItem.ts":
+/*!*************************************!*\
+  !*** ./src/editor/tools/addItem.ts ***!
+  \*************************************/
+/*! exports provided: AddItemTool */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddItemTool", function() { return AddItemTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+
+var AddItemTool = /** @class */ (function () {
+    function AddItemTool() {
+        this.id = "addItem";
+        this.name = "Place item";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].item;
+    }
+    AddItemTool.prototype.process = function (context, x, y, continuous) {
+        context.level.setItemAt(x, y, context.currentItem);
+        context.render();
+    };
+    return AddItemTool;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/editor/tools/drawTile.ts":
 /*!**************************************!*\
   !*** ./src/editor/tools/drawTile.ts ***!
@@ -636,16 +744,48 @@ var Tile = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DrawTileTool", function() { return DrawTileTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+
 var DrawTileTool = /** @class */ (function () {
     function DrawTileTool() {
         this.id = "drawTile";
         this.name = "Draw tile";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].tile;
     }
     DrawTileTool.prototype.process = function (context, x, y, continuous) {
         context.level.setTileAt(x, y, context.currentTile);
         context.render();
     };
     return DrawTileTool;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/editor/tools/eraseObject.ts":
+/*!*****************************************!*\
+  !*** ./src/editor/tools/eraseObject.ts ***!
+  \*****************************************/
+/*! exports provided: EraseObjectTool */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EraseObjectTool", function() { return EraseObjectTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+
+var EraseObjectTool = /** @class */ (function () {
+    function EraseObjectTool() {
+        this.id = "eraseObject";
+        this.name = "Erase object";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].item;
+    }
+    EraseObjectTool.prototype.process = function (context, x, y, continuous) {
+        context.level.deleteItemAt(x, y);
+        context.render();
+    };
+    return EraseObjectTool;
 }());
 
 
@@ -662,10 +802,13 @@ var DrawTileTool = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EraseTileTool", function() { return EraseTileTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+
 var EraseTileTool = /** @class */ (function () {
     function EraseTileTool() {
         this.id = "eraseTile";
         this.name = "Erase tile";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].tile;
     }
     EraseTileTool.prototype.process = function (context, x, y, continuous) {
         context.level.deleteTileAt(x, y);
@@ -688,10 +831,13 @@ var EraseTileTool = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FillTileTool", function() { return FillTileTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+
 var FillTileTool = /** @class */ (function () {
     function FillTileTool() {
         this.id = "fillTile";
         this.name = "Fill tiles";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].tile;
     }
     FillTileTool.prototype.floodFill = function (level, queue, x, y, w, h, refTile) {
         if (x < 0 || y < 0 ||
@@ -740,10 +886,13 @@ var FillTileTool = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetSpawnPointTool", function() { return SetSpawnPointTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+
 var SetSpawnPointTool = /** @class */ (function () {
     function SetSpawnPointTool() {
         this.id = "setSpawnPoint";
         this.name = "Set spawn point";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].tile;
     }
     SetSpawnPointTool.prototype.process = function (context, x, y, continuous) {
         var dims = context.level.dimensions;
@@ -759,6 +908,25 @@ var SetSpawnPointTool = /** @class */ (function () {
     return SetSpawnPointTool;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/editor/tools/tool.ts":
+/*!**********************************!*\
+  !*** ./src/editor/tools/tool.ts ***!
+  \**********************************/
+/*! exports provided: ToolType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToolType", function() { return ToolType; });
+var ToolType;
+(function (ToolType) {
+    ToolType["tile"] = "tiles";
+    ToolType["item"] = "items";
+})(ToolType || (ToolType = {}));
 
 
 /***/ }),
@@ -782,6 +950,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! fs */ "fs");
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _item__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./item */ "./src/editor/item.ts");
+/* harmony import */ var _xaxa__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./xaxa */ "./src/editor/xaxa.ts");
+/* harmony import */ var _tools_addItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./tools/addItem */ "./src/editor/tools/addItem.ts");
+/* harmony import */ var _tools_eraseObject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./tools/eraseObject */ "./src/editor/tools/eraseObject.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -825,16 +997,23 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
+
+
 var Viewer = /** @class */ (function () {
     function Viewer() {
         this.grid = true;
         this.collisionBoxes = true;
         this.availableTiles = [];
+        this.availableItems = [];
         this.tools = [
             new _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__["DrawTileTool"](),
             new _tools_fillTile__WEBPACK_IMPORTED_MODULE_2__["FillTileTool"](),
             new _tools_eraseTile__WEBPACK_IMPORTED_MODULE_3__["EraseTileTool"](),
-            new _tools_setSpawnPoint__WEBPACK_IMPORTED_MODULE_4__["SetSpawnPointTool"]()
+            new _tools_setSpawnPoint__WEBPACK_IMPORTED_MODULE_4__["SetSpawnPointTool"](),
+            new _tools_addItem__WEBPACK_IMPORTED_MODULE_9__["AddItemTool"](),
+            new _tools_eraseObject__WEBPACK_IMPORTED_MODULE_10__["EraseObjectTool"]()
         ];
         this.currentTool = this.tools[0];
         this.canvas = document.querySelector("canvas");
@@ -871,6 +1050,42 @@ var Viewer = /** @class */ (function () {
             });
         });
     };
+    Viewer.prototype.loadItems = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var itemsData, _i, itemsData_1, itemData;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(_xaxa__WEBPACK_IMPORTED_MODULE_8__["loadXaxa"])("items")];
+                    case 1:
+                        itemsData = _a.sent();
+                        for (_i = 0, itemsData_1 = itemsData; _i < itemsData_1.length; _i++) {
+                            itemData = itemsData_1[_i];
+                            this.availableItems.push(new _item__WEBPACK_IMPORTED_MODULE_7__["Item"](itemData[0], itemData[1], itemData[3], itemData[2], +itemData[4]));
+                        }
+                        return [4 /*yield*/, Promise.all(this.availableItems.map(function (t) { return t.loadImage(); }))];
+                    case 2:
+                        _a.sent();
+                        this.currentItem = this.availableItems[0];
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Viewer.prototype.load = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadTiles()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.loadItems()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     Viewer.prototype.render = function () {
         var _this = this;
         var rect = document.querySelector("div.canvasContainer").getBoundingClientRect();
@@ -899,6 +1114,9 @@ var Viewer = /** @class */ (function () {
                 ctx.lineWidth = 1;
                 ctx.stroke();
             }
+        });
+        this.level.items.forEach(function (instance) {
+            ctx.drawImage(instance.item.itemImage, 32 * instance.x, 32 * instance.y, 32, 32);
         });
         if (this.grid) {
             ctx.strokeStyle = "#AAAAAA50";
@@ -961,11 +1179,13 @@ var Viewer = /** @class */ (function () {
             toolDiv.addEventListener("click", function () {
                 toolbar.querySelector("div.active").classList.remove("active");
                 toolDiv.classList.add("active");
+                document.querySelector("div.tileList.visible").classList.remove("visible");
+                document.querySelector("div.tileList." + tool.type).classList.add("visible");
                 _this.currentTool = tool;
             });
             toolbar.appendChild(toolDiv);
         });
-        var tilebar = document.querySelector("div.tileList");
+        var tileList = document.querySelector("div.tileList.tiles");
         this.availableTiles.forEach(function (tile) {
             var tileDiv = document.createElement("div");
             tileDiv.classList.add("tile");
@@ -974,11 +1194,27 @@ var Viewer = /** @class */ (function () {
             tileDiv.classList.toggle("wall", tile.id.startsWith("w_"));
             tileDiv.innerHTML = "\n                <img src=\"../res/tiles/" + tile.id + ".png\">\n                <p>" + tile.id + "</p>\n            ";
             tileDiv.addEventListener("click", function () {
-                tilebar.querySelector("div.active").classList.remove("active");
+                tileList.querySelector("div.active").classList.remove("active");
                 tileDiv.classList.add("active");
                 _this.currentTile = tile;
             });
-            tilebar.appendChild(tileDiv);
+            tileList.appendChild(tileDiv);
+        });
+        var itemList = document.querySelector("div.tileList.items");
+        this.availableItems.forEach(function (item) {
+            var itemDiv = document.createElement("div");
+            itemDiv.classList.add("tile");
+            itemDiv.classList.toggle("active", _this.currentItem === item);
+            itemDiv.classList.toggle("attack", item.type === _item__WEBPACK_IMPORTED_MODULE_7__["ItemType"].attack);
+            itemDiv.classList.toggle("defense", item.type === _item__WEBPACK_IMPORTED_MODULE_7__["ItemType"].defense);
+            itemDiv.classList.toggle("health", item.type === _item__WEBPACK_IMPORTED_MODULE_7__["ItemType"].health);
+            itemDiv.innerHTML = "\n                <img src=\"../res/items/" + item.imageId + ".png\">\n                <p>" + item.name + "</p>\n            ";
+            itemDiv.addEventListener("click", function () {
+                itemList.querySelector("div.active").classList.remove("active");
+                itemDiv.classList.add("active");
+                _this.currentItem = item;
+            });
+            itemList.appendChild(itemDiv);
         });
         document.querySelector("input#showGrid").addEventListener("input", function (e) {
             var input = e.target;
@@ -994,6 +1230,82 @@ var Viewer = /** @class */ (function () {
     return Viewer;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/editor/xaxa.ts":
+/*!****************************!*\
+  !*** ./src/editor/xaxa.ts ***!
+  \****************************/
+/*! exports provided: loadXaxa */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadXaxa", function() { return loadXaxa; });
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! util */ "util");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+var readFileAsync = Object(util__WEBPACK_IMPORTED_MODULE_0__["promisify"])(fs__WEBPACK_IMPORTED_MODULE_1__["readFile"]);
+function loadXaxa(file) {
+    return __awaiter(this, void 0, void 0, function () {
+        var data, items;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, readFileAsync("res/" + file + ".xaxa", "utf-8")];
+                case 1:
+                    data = _a.sent();
+                    items = [];
+                    data.split(/\r?\n/).forEach(function (item) {
+                        if (item.startsWith("//"))
+                            return;
+                        items.push(item.split("|"));
+                    });
+                    return [2 /*return*/, items];
+            }
+        });
+    });
+}
 
 
 /***/ }),
@@ -1019,9 +1331,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var _a = __webpack_require__(/*! electron */ "electron").remote, Menu = _a.Menu, dialog = _a.dialog;
 var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
-viewer.loadTiles().then(function () {
+viewer.load().then(function () {
     viewer.setupDOM();
-    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, [], 2, 2);
+    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, [], [], 2, 2);
     viewer.loadLevel(level);
     window.addEventListener("resize", function () { return viewer.render(); });
     window.genLevel = function () {
@@ -1033,6 +1345,28 @@ var menu = Menu.buildFromTemplate([
         type: "submenu",
         label: "File",
         submenu: [
+            {
+                label: "Open project",
+                click: function () {
+                    dialog.showOpenDialog({
+                        filters: [
+                            {
+                                name: "xoxo-Editor Project",
+                                extensions: ["xexe"]
+                            }
+                        ]
+                    }).then(function (data) {
+                        if (data.canceled)
+                            return;
+                        console.log(data);
+                        // writeFileSync(
+                        //     data.filePath,
+                        //     viewer.level.fileData,
+                        //     "utf-8"
+                        // )
+                    });
+                }
+            },
             {
                 label: "Save project",
                 click: function () {

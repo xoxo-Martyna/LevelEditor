@@ -8,12 +8,12 @@ const { Menu, dialog } = require("electron").remote
 
 const viewer = new Viewer()
 
-viewer.loadTiles().then(() => {
+viewer.load().then(() => {
     viewer.setupDOM()
 
     const level = new Level(
         viewer,
-        [],
+        [], [],
         2, 2
     )
 
@@ -33,6 +33,30 @@ const menu = Menu.buildFromTemplate(
             type: "submenu",
             label: "File",
             submenu: [
+                {
+                    label: "Open project",
+                    click: () => {
+                        dialog.showOpenDialog(
+                            {
+                                filters: [
+                                    {
+                                        name: "xoxo-Editor Project",
+                                        extensions: ["xexe"]
+                                    }
+                                ]
+                            }
+                        ).then((data: any) => {
+                            if (data.canceled) return
+                            console.log(data)
+
+                            // writeFileSync(
+                            //     data.filePath,
+                            //     viewer.level.fileData,
+                            //     "utf-8"
+                            // )
+                        })
+                    }
+                },
                 {
                     label: "Save project",
                     click: () => {

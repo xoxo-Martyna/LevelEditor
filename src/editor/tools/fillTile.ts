@@ -1,4 +1,4 @@
-import { ITool } from "./tool";
+import { ITool, ToolType } from "./tool";
 import { Viewer } from "../viewer";
 import { Tile } from "../tile";
 import { Level } from "../level";
@@ -6,6 +6,7 @@ import { Level } from "../level";
 export class FillTileTool implements ITool {
     public id = "fillTile"
     public name = "Fill tiles"
+    public type = ToolType.tile
 
     floodFill(
         level: Level, queue: number[][],

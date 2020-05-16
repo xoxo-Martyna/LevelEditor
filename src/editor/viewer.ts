@@ -7,6 +7,10 @@ import { EraseTileTool } from "./tools/eraseTile"
 import { SetSpawnPointTool } from "./tools/setSpawnPoint"
 import { promisify } from "util"
 import { readdir } from "fs"
+import { Item, ItemType } from "./item"
+import { loadXaxa } from "./xaxa"
+import { AddItemTool } from "./tools/addItem"
+import { EraseObjectTool } from "./tools/eraseObject"
 
 export class Viewer {
     public grid = true
@@ -15,12 +19,18 @@ export class Viewer {
     public availableTiles: Tile[] = []
     public currentTile: Tile
 
+    public availableItems: Item[] = []
+    public currentItem: Item
+
     public tools: ITool[] = [
         new DrawTileTool(),
         new FillTileTool(),
         new EraseTileTool(),
 
-        new SetSpawnPointTool()
+        new SetSpawnPointTool(),
+
+        new AddItemTool(),
+        new EraseObjectTool()
     ]
     public currentTool = this.tools[0]
 
@@ -58,6 +68,34 @@ export class Viewer {
             )
         )
         this.currentTile = this.availableTiles[0]
+    }
+
+    async loadItems(): Promise<void> {
+        const itemsData = await loadXaxa("items")
+        
+        for (const itemData of itemsData) {
+            this.availableItems.push(
+                new Item(
+                    itemData[0],
+                    itemData[1],
+                    itemData[3],
+                    itemData[2] as ItemType,
+                    +itemData[4]
+                )
+            )
+        }
+        
+        await Promise.all(
+            this.availableItems.map(
+                t => t.loadImage()
+            )
+        )
+        this.currentItem = this.availableItems[0]
+    }
+
+    async load(): Promise<void> {
+        await this.loadTiles()
+        await this.loadItems()
     }
 
     render() {
@@ -123,6 +161,17 @@ export class Viewer {
                     ctx.lineWidth = 1
                     ctx.stroke()
                 }
+            }
+        )
+
+        this.level.items.forEach(
+            instance => {
+                ctx.drawImage(
+                    instance.item.itemImage,
+                    32 * instance.x,
+                    32 * instance.y,
+                    32, 32
+                )
             }
         )
 
@@ -238,13 +287,16 @@ export class Viewer {
                 toolbar.querySelector("div.active").classList.remove("active")
                 toolDiv.classList.add("active")
 
+                document.querySelector(`div.tileList.visible`).classList.remove("visible")
+                document.querySelector(`div.tileList.${tool.type}`).classList.add("visible")
+
                 this.currentTool = tool
             })
 
             toolbar.appendChild(toolDiv)
         })
 
-        const tilebar = document.querySelector("div.tileList")
+        const tileList = document.querySelector("div.tileList.tiles")
         this.availableTiles.forEach(tile => {
             const tileDiv = document.createElement("div")
             tileDiv.classList.add("tile")
@@ -259,13 +311,38 @@ export class Viewer {
             `
 
             tileDiv.addEventListener("click", () => {
-                tilebar.querySelector("div.active").classList.remove("active")
+                tileList.querySelector("div.active").classList.remove("active")
                 tileDiv.classList.add("active")
 
                 this.currentTile = tile
             })
 
-            tilebar.appendChild(tileDiv)
+            tileList.appendChild(tileDiv)
+        })
+
+        const itemList = document.querySelector("div.tileList.items")
+        this.availableItems.forEach(item => {
+            const itemDiv = document.createElement("div")
+            itemDiv.classList.add("tile")
+            itemDiv.classList.toggle("active", this.currentItem === item)
+
+            itemDiv.classList.toggle("attack", item.type === ItemType.attack)
+            itemDiv.classList.toggle("defense", item.type === ItemType.defense)
+            itemDiv.classList.toggle("health", item.type === ItemType.health)
+
+            itemDiv.innerHTML = `
+                <img src="../res/items/${item.imageId}.png">
+                <p>${item.name}</p>
+            `
+
+            itemDiv.addEventListener("click", () => {
+                itemList.querySelector("div.active").classList.remove("active")
+                itemDiv.classList.add("active")
+
+                this.currentItem = item
+            })
+
+            itemList.appendChild(itemDiv)
         })
 
         document.querySelector("input#showGrid").addEventListener("input", (e) => {

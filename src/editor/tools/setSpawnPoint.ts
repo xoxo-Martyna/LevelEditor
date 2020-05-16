@@ -1,9 +1,10 @@
-import { ITool } from "./tool";
+import { ITool, ToolType } from "./tool";
 import { Viewer } from "../viewer";
 
 export class SetSpawnPointTool implements ITool {
     public id = "setSpawnPoint"
     public name = "Set spawn point"
+    public type = ToolType.tile
 
     process(
         context: Viewer, x: number, y: number, continuous: boolean

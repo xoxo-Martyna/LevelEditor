@@ -11,12 +11,13 @@ export class FillTileTool implements ITool {
     floodFill(
         level: Level, queue: number[][],
         x: number, y: number,
-        w: number, h: number,
+        left: number, top: number,
+        right: number, bottom: number,
         refTile: Tile
     ) {
         if (
-            x < 0 || y < 0 ||
-            x >= w || y >= h ||
+            x < left || y < top ||
+            x >= right || y >= bottom ||
             queue.findIndex(
                 t => t[0] === x && t[1] === y
             ) !== -1
@@ -32,22 +33,22 @@ export class FillTileTool implements ITool {
 
             this.floodFill(
                 level, queue,
-                x - 1, y, w, h,
+                x - 1, y, left, top, right, bottom,
                 refTile
             )
             this.floodFill(
                 level, queue,
-                x + 1, y, w, h,
+                x + 1, y, left, top, right, bottom,
                 refTile
             )
             this.floodFill(
                 level, queue,
-                x, y - 1, w, h,
+                x, y - 1, left, top, right, bottom,
                 refTile
             )
             this.floodFill(
                 level, queue,
-                x, y + 1, w, h,
+                x, y + 1, left, top, right, bottom,
                 refTile
             )
         }
@@ -58,7 +59,8 @@ export class FillTileTool implements ITool {
     ) {
         if (continuous) return
 
-        const levelDim = context.level.dimensions
+        const left = Math.floor(x / 10)
+        const top = Math.floor(y / 10)
         
         let referenceTile: Tile = null
         const referenceInstance = context.level.getTileAt(x, y)
@@ -68,7 +70,10 @@ export class FillTileTool implements ITool {
 
         this.floodFill(
             context.level, queue,
-            x, y, levelDim.x, levelDim.y,
+            x, y,
+            left * 10, top * 10,
+            left * 10 + 10,
+            top * 10 + 10,
             referenceTile
         )
         

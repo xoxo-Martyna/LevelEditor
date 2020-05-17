@@ -1,6 +1,7 @@
 import { Tile } from "./tile";
 import { Viewer } from "./viewer";
 import { Item } from "./item";
+import { Opponent } from "./opponent";
 
 export class TileInstance {
     constructor(
@@ -18,11 +19,20 @@ export class ItemInstance {
     ) {}
 }
 
+export class OpponentInstance {
+    constructor(
+        public opponent: Opponent,
+        public x: number,
+        public y: number
+    ) {}
+}
+
 export class Level {
     constructor(
         public context: Viewer,
         public tiles: TileInstance[] = [],
         public items: ItemInstance[] = [],
+        public opponents: OpponentInstance[] = [],
         public spawnX: number,
         public spawnY: number
     ) {}
@@ -68,6 +78,31 @@ export class Level {
         return {
             x: Math.ceil(width / 10) * 10,
             y: Math.ceil(height / 10) * 10,
+        }
+    }
+
+    getOpponentAt(x: number, y: number): OpponentInstance {
+        return this.opponents.find(
+            t => t.x === x && t.y === y
+        )
+    }
+
+    deleteOpponentAt(x: number, y: number) {
+        const instance = this.getOpponentAt(x, y)
+        if (instance)
+            this.opponents.splice(
+                this.opponents.indexOf(instance), 1
+            )
+    }
+
+    setOpponentAt(x: number, y: number, opponent: Opponent) {
+        const instance = this.getOpponentAt(x, y)
+        if (instance) {
+            instance.opponent = opponent
+        } else {
+            this.opponents.push(
+                new OpponentInstance(opponent, x, y)
+            )
         }
     }
 
@@ -138,10 +173,16 @@ export class Level {
                 return new ItemInstance(item, itemspec.x, itemspec.y)
             }
         )
-        // const items
+        const opponents = json.opponents.map(
+            (oppspec: any) => {
+                const opponent = context.availableOpponents.find(i => i.id === oppspec.id)
+
+                return new OpponentInstance(opponent, oppspec.x, oppspec.y)
+            }
+        )
 
         return new Level(
-            context, tiles, items,
+            context, tiles, items, opponents,
             json.spawn.x, json.spawn.y
         )
     }
@@ -168,6 +209,15 @@ export class Level {
                             x: item.x,
                             y: item.y,
                             id: item.item.id
+                        }
+                    }
+                ),
+                opponents: this.opponents.map(
+                    opponent => {
+                        return {
+                            x: opponent.x,
+                            y: opponent.y,
+                            id: opponent.opponent.id
                         }
                     }
                 )

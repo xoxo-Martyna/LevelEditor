@@ -535,13 +535,14 @@ var Item = /** @class */ (function () {
 /*!*****************************!*\
   !*** ./src/editor/level.ts ***!
   \*****************************/
-/*! exports provided: TileInstance, ItemInstance, Level */
+/*! exports provided: TileInstance, ItemInstance, OpponentInstance, Level */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TileInstance", function() { return TileInstance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemInstance", function() { return ItemInstance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OpponentInstance", function() { return OpponentInstance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Level", function() { return Level; });
 var TileInstance = /** @class */ (function () {
     function TileInstance(tile, x, y) {
@@ -561,13 +562,24 @@ var ItemInstance = /** @class */ (function () {
     return ItemInstance;
 }());
 
+var OpponentInstance = /** @class */ (function () {
+    function OpponentInstance(opponent, x, y) {
+        this.opponent = opponent;
+        this.x = x;
+        this.y = y;
+    }
+    return OpponentInstance;
+}());
+
 var Level = /** @class */ (function () {
-    function Level(context, tiles, items, spawnX, spawnY) {
+    function Level(context, tiles, items, opponents, spawnX, spawnY) {
         if (tiles === void 0) { tiles = []; }
         if (items === void 0) { items = []; }
+        if (opponents === void 0) { opponents = []; }
         this.context = context;
         this.tiles = tiles;
         this.items = items;
+        this.opponents = opponents;
         this.spawnX = spawnX;
         this.spawnY = spawnY;
     }
@@ -604,6 +616,23 @@ var Level = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Level.prototype.getOpponentAt = function (x, y) {
+        return this.opponents.find(function (t) { return t.x === x && t.y === y; });
+    };
+    Level.prototype.deleteOpponentAt = function (x, y) {
+        var instance = this.getOpponentAt(x, y);
+        if (instance)
+            this.opponents.splice(this.opponents.indexOf(instance), 1);
+    };
+    Level.prototype.setOpponentAt = function (x, y, opponent) {
+        var instance = this.getOpponentAt(x, y);
+        if (instance) {
+            instance.opponent = opponent;
+        }
+        else {
+            this.opponents.push(new OpponentInstance(opponent, x, y));
+        }
+    };
     Level.prototype.getItemAt = function (x, y) {
         return this.items.find(function (t) { return t.x === x && t.y === y; });
     };
@@ -648,8 +677,11 @@ var Level = /** @class */ (function () {
             var item = context.availableItems.find(function (i) { return i.id === itemspec.id; });
             return new ItemInstance(item, itemspec.x, itemspec.y);
         });
-        // const items
-        return new Level(context, tiles, items, json.spawn.x, json.spawn.y);
+        var opponents = json.opponents.map(function (oppspec) {
+            var opponent = context.availableOpponents.find(function (i) { return i.id === oppspec.id; });
+            return new OpponentInstance(opponent, oppspec.x, oppspec.y);
+        });
+        return new Level(context, tiles, items, opponents, json.spawn.x, json.spawn.y);
     };
     Object.defineProperty(Level.prototype, "fileData", {
         get: function () {
@@ -671,6 +703,13 @@ var Level = /** @class */ (function () {
                         y: item.y,
                         id: item.item.id
                     };
+                }),
+                opponents: this.opponents.map(function (opponent) {
+                    return {
+                        x: opponent.x,
+                        y: opponent.y,
+                        id: opponent.opponent.id
+                    };
                 })
             });
         },
@@ -678,6 +717,38 @@ var Level = /** @class */ (function () {
         configurable: true
     });
     return Level;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/editor/opponent.ts":
+/*!********************************!*\
+  !*** ./src/editor/opponent.ts ***!
+  \********************************/
+/*! exports provided: Opponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Opponent", function() { return Opponent; });
+var Opponent = /** @class */ (function () {
+    function Opponent(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+    Opponent.prototype.loadImage = function () {
+        var _this = this;
+        this.opponentImage = new Image();
+        return new Promise(function (resolve, reject) {
+            _this.opponentImage.addEventListener("load", function () {
+                resolve();
+            });
+            _this.opponentImage.src = "../res/opponents/" + _this.id + ".png";
+        });
+    };
+    return Opponent;
 }());
 
 
@@ -746,6 +817,35 @@ var AddItemTool = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/editor/tools/addOpponent.ts":
+/*!*****************************************!*\
+  !*** ./src/editor/tools/addOpponent.ts ***!
+  \*****************************************/
+/*! exports provided: AddOpponentTool */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddOpponentTool", function() { return AddOpponentTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+
+var AddOpponentTool = /** @class */ (function () {
+    function AddOpponentTool() {
+        this.id = "addOpponent";
+        this.name = "Place opponent";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].opponent;
+    }
+    AddOpponentTool.prototype.process = function (context, x, y, continuous) {
+        context.level.setOpponentAt(x, y, context.currentOpponent);
+        context.render();
+    };
+    return AddOpponentTool;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/editor/tools/drawTile.ts":
 /*!**************************************!*\
   !*** ./src/editor/tools/drawTile.ts ***!
@@ -795,6 +895,7 @@ var EraseObjectTool = /** @class */ (function () {
     }
     EraseObjectTool.prototype.process = function (context, x, y, continuous) {
         context.level.deleteItemAt(x, y);
+        context.level.deleteOpponentAt(x, y);
         context.render();
     };
     return EraseObjectTool;
@@ -851,31 +952,32 @@ var FillTileTool = /** @class */ (function () {
         this.name = "Fill tiles";
         this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].tile;
     }
-    FillTileTool.prototype.floodFill = function (level, queue, x, y, w, h, refTile) {
-        if (x < 0 || y < 0 ||
-            x >= w || y >= h ||
+    FillTileTool.prototype.floodFill = function (level, queue, x, y, left, top, right, bottom, refTile) {
+        if (x < left || y < top ||
+            x >= right || y >= bottom ||
             queue.findIndex(function (t) { return t[0] === x && t[1] === y; }) !== -1)
             return;
         var tile = level.getTileAt(x, y);
         if ((tile && refTile === tile.tile) ||
             (!refTile && !tile)) {
             queue.push([x, y]);
-            this.floodFill(level, queue, x - 1, y, w, h, refTile);
-            this.floodFill(level, queue, x + 1, y, w, h, refTile);
-            this.floodFill(level, queue, x, y - 1, w, h, refTile);
-            this.floodFill(level, queue, x, y + 1, w, h, refTile);
+            this.floodFill(level, queue, x - 1, y, left, top, right, bottom, refTile);
+            this.floodFill(level, queue, x + 1, y, left, top, right, bottom, refTile);
+            this.floodFill(level, queue, x, y - 1, left, top, right, bottom, refTile);
+            this.floodFill(level, queue, x, y + 1, left, top, right, bottom, refTile);
         }
     };
     FillTileTool.prototype.process = function (context, x, y, continuous) {
         if (continuous)
             return;
-        var levelDim = context.level.dimensions;
+        var left = Math.floor(x / 10);
+        var top = Math.floor(y / 10);
         var referenceTile = null;
         var referenceInstance = context.level.getTileAt(x, y);
         if (referenceInstance)
             referenceTile = referenceInstance.tile;
         var queue = [];
-        this.floodFill(context.level, queue, x, y, levelDim.x, levelDim.y, referenceTile);
+        this.floodFill(context.level, queue, x, y, left * 10, top * 10, left * 10 + 10, top * 10 + 10, referenceTile);
         queue.forEach(function (coords) {
             context.level.setTileAt(coords[0], coords[1], context.currentTile);
         });
@@ -938,6 +1040,7 @@ var ToolType;
 (function (ToolType) {
     ToolType["tile"] = "tiles";
     ToolType["item"] = "items";
+    ToolType["opponent"] = "opponents";
 })(ToolType || (ToolType = {}));
 
 
@@ -966,6 +1069,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _xaxa__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./xaxa */ "./src/editor/xaxa.ts");
 /* harmony import */ var _tools_addItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./tools/addItem */ "./src/editor/tools/addItem.ts");
 /* harmony import */ var _tools_eraseObject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./tools/eraseObject */ "./src/editor/tools/eraseObject.ts");
+/* harmony import */ var _tools_addOpponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./tools/addOpponent */ "./src/editor/tools/addOpponent.ts");
+/* harmony import */ var _opponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./opponent */ "./src/editor/opponent.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1013,24 +1118,33 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
 var Viewer = /** @class */ (function () {
     function Viewer() {
         this.grid = true;
         this.collisionBoxes = true;
+        this.sublevelBounds = true;
         this.availableTiles = [];
         this.availableItems = [];
+        this.availableOpponents = [];
         this.tools = [
             new _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__["DrawTileTool"](),
             new _tools_fillTile__WEBPACK_IMPORTED_MODULE_2__["FillTileTool"](),
             new _tools_eraseTile__WEBPACK_IMPORTED_MODULE_3__["EraseTileTool"](),
             new _tools_setSpawnPoint__WEBPACK_IMPORTED_MODULE_4__["SetSpawnPointTool"](),
             new _tools_addItem__WEBPACK_IMPORTED_MODULE_9__["AddItemTool"](),
+            new _tools_addOpponent__WEBPACK_IMPORTED_MODULE_11__["AddOpponentTool"](),
             new _tools_eraseObject__WEBPACK_IMPORTED_MODULE_10__["EraseObjectTool"]()
         ];
         this.currentTool = this.tools[0];
+        this.viewX = 0;
+        this.viewY = 0;
         this.canvas = document.querySelector("canvas");
     }
     Viewer.prototype.loadLevel = function (level) {
+        this.viewX = 0;
+        this.viewY = 0;
         this.level = level;
         this.render();
     };
@@ -1083,6 +1197,27 @@ var Viewer = /** @class */ (function () {
             });
         });
     };
+    Viewer.prototype.loadOpponents = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var itemsData, _i, itemsData_2, itemData;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(_xaxa__WEBPACK_IMPORTED_MODULE_8__["loadXaxa"])("opponents")];
+                    case 1:
+                        itemsData = _a.sent();
+                        for (_i = 0, itemsData_2 = itemsData; _i < itemsData_2.length; _i++) {
+                            itemData = itemsData_2[_i];
+                            this.availableOpponents.push(new _opponent__WEBPACK_IMPORTED_MODULE_12__["Opponent"](itemData[0], itemData[1]));
+                        }
+                        return [4 /*yield*/, Promise.all(this.availableOpponents.map(function (t) { return t.loadImage(); }))];
+                    case 2:
+                        _a.sent();
+                        this.currentOpponent = this.availableOpponents[0];
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     Viewer.prototype.load = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -1092,6 +1227,9 @@ var Viewer = /** @class */ (function () {
                         _a.sent();
                         return [4 /*yield*/, this.loadItems()];
                     case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.loadOpponents()];
+                    case 3:
                         _a.sent();
                         return [2 /*return*/];
                 }
@@ -1103,14 +1241,25 @@ var Viewer = /** @class */ (function () {
         var rect = document.querySelector("div.canvasContainer").getBoundingClientRect();
         this.canvas.width = rect.width;
         this.canvas.height = rect.height;
+        var viewTileLeft = Math.floor(-this.viewX / 32);
+        var viewTileTop = Math.floor(-this.viewY / 32);
+        var viewTileRight = Math.ceil((-this.viewX + rect.width) / 32);
+        var viewTileBottom = Math.ceil((-this.viewY + rect.height) / 32);
         var ctx = this.canvas.getContext("2d");
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.resetTransform();
+        ctx.translate(this.viewX, this.viewY);
         var levelSlices = this.level.slices;
         levelSlices.forEach(function (slice) {
             ctx.fillStyle = "rgb(56, 56, 56)";
             ctx.fillRect(320 * slice.x, 320 * slice.y, 320, 320);
         });
         this.level.tiles.forEach(function (instance) {
+            if (instance.x < viewTileLeft ||
+                instance.y < viewTileTop ||
+                instance.x > viewTileRight ||
+                instance.y > viewTileBottom)
+                return;
             ctx.drawImage(instance.tile.tileImage, 32 * instance.x, 32 * instance.y, 32, 32);
             if (_this.collisionBoxes && instance.tile.collidable) {
                 ctx.beginPath();
@@ -1128,30 +1277,45 @@ var Viewer = /** @class */ (function () {
             }
         });
         this.level.items.forEach(function (instance) {
+            if (instance.x < viewTileLeft ||
+                instance.y < viewTileTop ||
+                instance.x > viewTileRight ||
+                instance.y > viewTileBottom)
+                return;
             ctx.drawImage(instance.item.itemImage, 32 * instance.x, 32 * instance.y, 32, 32);
         });
-        if (this.grid) {
-            ctx.strokeStyle = "#AAAAAA50";
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            for (var x = 32; x < this.canvas.width; x += 32) {
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, this.canvas.height);
-            }
-            for (var y = 32; y < this.canvas.height; y += 32) {
-                ctx.moveTo(0, y);
-                ctx.lineTo(this.canvas.width, y);
-            }
-            ctx.stroke();
-        }
-        levelSlices.forEach(function (slice) {
-            ctx.fillStyle = "#fff";
-            ctx.font = "400 13px";
-            ctx.fillText("[" + slice.x + ", " + slice.y + "]", 320 * slice.x + 8, 320 * slice.y + 20);
-            ctx.strokeStyle = "#FFFF00";
-            ctx.lineWidth = 2;
-            ctx.strokeRect(320 * slice.x, 320 * slice.y, 320, 320);
+        this.level.opponents.forEach(function (instance) {
+            if (instance.x < viewTileLeft ||
+                instance.y < viewTileTop ||
+                instance.x > viewTileRight ||
+                instance.y > viewTileBottom)
+                return;
+            ctx.drawImage(instance.opponent.opponentImage, 32 * instance.x, 32 * instance.y, 32, 32);
         });
+        // if (this.grid) {
+        //     ctx.strokeStyle = "#AAAAAA50"
+        //     ctx.lineWidth = 2
+        //     ctx.beginPath()
+        //     for (let x = 32; x < this.canvas.width; x += 32) {
+        //         ctx.moveTo(x, 0)
+        //         ctx.lineTo(x, this.canvas.height)
+        //     }
+        //     for (let y = 32; y < this.canvas.height; y += 32) {
+        //         ctx.moveTo(0, y)
+        //         ctx.lineTo(this.canvas.width, y)
+        //     }
+        //     ctx.stroke()
+        // }
+        if (this.sublevelBounds) {
+            levelSlices.forEach(function (slice) {
+                ctx.fillStyle = "#fff";
+                ctx.font = "400 13px";
+                ctx.fillText("[" + slice.x + ", " + slice.y + "]", 320 * slice.x + 8, 320 * slice.y + 20);
+                ctx.strokeStyle = "#FFFF00";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(320 * slice.x, 320 * slice.y, 320, 320);
+            });
+        }
         ctx.beginPath();
         ctx.arc(32 * this.level.spawnX + 16, 32 * this.level.spawnY + 10, 6, 0, Math.PI * 2);
         ctx.rect(32 * this.level.spawnX + 8, 32 * this.level.spawnY + 16, 16, 12);
@@ -1163,21 +1327,30 @@ var Viewer = /** @class */ (function () {
     };
     Viewer.prototype.processTool = function (e) {
         var rect = this.canvas.getBoundingClientRect();
-        var x = Math.floor((e.clientX - rect.x) / 32);
-        var y = Math.floor((e.clientY - rect.y) / 32);
-        if (e.buttons & 1 || e.type === "mouseup") {
+        var x = Math.floor((e.clientX - rect.x - this.viewX) / 32);
+        var y = Math.floor((e.clientY - rect.y - this.viewY) / 32);
+        if (e.buttons & 1 ||
+            (e.type === "mouseup" && e.buttons & 1)) {
             this.currentTool.process(this, x, y, e.type === "mousemove");
+        }
+        else if (e.type === "mousemove" && e.buttons & 4) {
+            this.viewX += e.movementX;
+            this.viewY += e.movementY;
+            this.render();
         }
         else {
             var tile = this.level.getTileAt(x, y);
             var tileId = "N/A";
             if (tile)
                 tileId = tile.tile.id;
-            document.querySelector("div.viewerCoordinates").innerHTML = "\n                " + tileId + "<br>\n                X: " + x + "<br>\n                Y: " + y + "<br>\n                Sublevel: " + Math.floor(x / 10) + ", " + Math.floor(y / 10) + "\n            ";
+            var subX = Math.floor(x / 10);
+            var subY = Math.floor(y / 10);
+            document.querySelector("div.viewerCoordinates").innerHTML = "\n                " + tileId + "<br>\n                X: " + (x - subX * 10) + "<br>\n                Y: " + (y - subY * 10) + "<br>\n                Sublevel: " + subX + ", " + subY + "\n            ";
         }
     };
     Viewer.prototype.setupDOM = function () {
         var _this = this;
+        this.canvas.addEventListener("mousedown", function (e) { return _this.processTool(e); });
         this.canvas.addEventListener("mouseup", function (e) { return _this.processTool(e); });
         this.canvas.addEventListener("mousemove", function (e) {
             _this.processTool(e);
@@ -1228,6 +1401,19 @@ var Viewer = /** @class */ (function () {
             });
             itemList.appendChild(itemDiv);
         });
+        var opponentList = document.querySelector("div.tileList.opponents");
+        this.availableOpponents.forEach(function (opponent) {
+            var opponentDiv = document.createElement("div");
+            opponentDiv.classList.add("tile");
+            opponentDiv.classList.toggle("active", _this.currentOpponent === opponent);
+            opponentDiv.innerHTML = "\n                <img src=\"../res/opponents/" + opponent.id + ".png\">\n                <p>" + opponent.name + "</p>\n            ";
+            opponentDiv.addEventListener("click", function () {
+                opponentList.querySelector("div.active").classList.remove("active");
+                opponentDiv.classList.add("active");
+                _this.currentOpponent = opponent;
+            });
+            opponentList.appendChild(opponentDiv);
+        });
         document.querySelector("input#showGrid").addEventListener("input", function (e) {
             var input = e.target;
             _this.grid = input.checked;
@@ -1236,6 +1422,11 @@ var Viewer = /** @class */ (function () {
         document.querySelector("input#showColliders").addEventListener("input", function (e) {
             var input = e.target;
             _this.collisionBoxes = input.checked;
+            _this.render();
+        });
+        document.querySelector("input#showSublevels").addEventListener("input", function (e) {
+            var input = e.target;
+            _this.sublevelBounds = input.checked;
             _this.render();
         });
     };
@@ -1345,7 +1536,7 @@ var _a = __webpack_require__(/*! electron */ "electron").remote, Menu = _a.Menu,
 var viewer = new _editor_viewer__WEBPACK_IMPORTED_MODULE_1__["Viewer"]();
 viewer.load().then(function () {
     viewer.setupDOM();
-    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, [], [], 2, 2);
+    var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, [], [], [], 2, 2);
     viewer.loadLevel(level);
     window.addEventListener("resize", function () { return viewer.render(); });
     window.genLevel = function () {

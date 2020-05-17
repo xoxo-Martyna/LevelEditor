@@ -2,7 +2,8 @@ import { Viewer } from "../viewer";
 
 export enum ToolType {
     tile = "tiles",
-    item = "items"
+    item = "items",
+    opponent = "opponents"
 }
 
 export interface ITool {

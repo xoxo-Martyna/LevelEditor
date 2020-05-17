@@ -12,6 +12,9 @@ export class EraseObjectTool implements ITool {
         context.level.deleteItemAt(
             x, y
         )
+        context.level.deleteOpponentAt(
+            x, y
+        )
         context.render()
     }
 }

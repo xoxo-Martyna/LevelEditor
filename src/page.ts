@@ -13,7 +13,7 @@ viewer.load().then(() => {
 
     const level = new Level(
         viewer,
-        [], [],
+        [], [], [],
         2, 2
     )
 

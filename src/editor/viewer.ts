@@ -11,16 +11,22 @@ import { Item, ItemType } from "./item"
 import { loadXaxa } from "./xaxa"
 import { AddItemTool } from "./tools/addItem"
 import { EraseObjectTool } from "./tools/eraseObject"
+import { AddOpponentTool } from "./tools/addOpponent"
+import { Opponent } from "./opponent"
 
 export class Viewer {
     public grid = true
     public collisionBoxes = true
+    public sublevelBounds = true
 
     public availableTiles: Tile[] = []
     public currentTile: Tile
 
     public availableItems: Item[] = []
     public currentItem: Item
+
+    public availableOpponents: Opponent[] = []
+    public currentOpponent: Opponent
 
     public tools: ITool[] = [
         new DrawTileTool(),
@@ -30,18 +36,26 @@ export class Viewer {
         new SetSpawnPointTool(),
 
         new AddItemTool(),
+        new AddOpponentTool(),
         new EraseObjectTool()
     ]
     public currentTool = this.tools[0]
 
     public level: Level
 
+    public viewX = 0
+    public viewY = 0
+
     public canvas: HTMLCanvasElement = document.querySelector(
         "canvas"
     )
 
     loadLevel(level: Level) {
+        this.viewX = 0
+        this.viewY = 0
+
         this.level = level
+
         this.render()
     }
 
@@ -93,9 +107,30 @@ export class Viewer {
         this.currentItem = this.availableItems[0]
     }
 
+    async loadOpponents(): Promise<void> {
+        const itemsData = await loadXaxa("opponents")
+        
+        for (const itemData of itemsData) {
+            this.availableOpponents.push(
+                new Opponent(
+                    itemData[0],
+                    itemData[1]
+                )
+            )
+        }
+        
+        await Promise.all(
+            this.availableOpponents.map(
+                t => t.loadImage()
+            )
+        )
+        this.currentOpponent = this.availableOpponents[0]
+    }
+
     async load(): Promise<void> {
         await this.loadTiles()
         await this.loadItems()
+        await this.loadOpponents()
     }
 
     render() {
@@ -103,11 +138,19 @@ export class Viewer {
         this.canvas.width = rect.width
         this.canvas.height = rect.height
 
+        const viewTileLeft = Math.floor(-this.viewX / 32)
+        const viewTileTop = Math.floor(-this.viewY / 32)
+        const viewTileRight = Math.ceil((-this.viewX + rect.width) / 32)
+        const viewTileBottom = Math.ceil((-this.viewY + rect.height) / 32)
+
         const ctx = this.canvas.getContext("2d")
 
         ctx.clearRect(
             0, 0, this.canvas.width, this.canvas.height
         )
+
+        ctx.resetTransform()
+        ctx.translate(this.viewX, this.viewY)
 
         const levelSlices = this.level.slices
 
@@ -123,6 +166,14 @@ export class Viewer {
         
         this.level.tiles.forEach(
             instance => {
+                if (
+                    instance.x < viewTileLeft ||
+                    instance.y < viewTileTop ||
+                    instance.x > viewTileRight ||
+                    instance.y > viewTileBottom
+                )
+                    return
+
                 ctx.drawImage(
                     instance.tile.tileImage,
                     32 * instance.x,
@@ -166,6 +217,14 @@ export class Viewer {
 
         this.level.items.forEach(
             instance => {
+                if (
+                    instance.x < viewTileLeft ||
+                    instance.y < viewTileTop ||
+                    instance.x > viewTileRight ||
+                    instance.y > viewTileBottom
+                )
+                    return
+
                 ctx.drawImage(
                     instance.item.itemImage,
                     32 * instance.x,
@@ -174,41 +233,61 @@ export class Viewer {
                 )
             }
         )
-
-        if (this.grid) {
-            ctx.strokeStyle = "#AAAAAA50"
-            ctx.lineWidth = 2
-
-            ctx.beginPath()
-            for (let x = 32; x < this.canvas.width; x += 32) {
-                ctx.moveTo(x, 0)
-                ctx.lineTo(x, this.canvas.height)
-            }
-            for (let y = 32; y < this.canvas.height; y += 32) {
-                ctx.moveTo(0, y)
-                ctx.lineTo(this.canvas.width, y)
-            }
-            ctx.stroke()
-        }
-
-        levelSlices.forEach(
-            slice => {
-                ctx.fillStyle = "#fff"
-                ctx.font = "400 13px"
-                ctx.fillText(
-                    `[${slice.x}, ${slice.y}]`,
-                    320 * slice.x + 8, 320 * slice.y + 20
+        this.level.opponents.forEach(
+            instance => {
+                if (
+                    instance.x < viewTileLeft ||
+                    instance.y < viewTileTop ||
+                    instance.x > viewTileRight ||
+                    instance.y > viewTileBottom
                 )
+                    return
 
-                
-                ctx.strokeStyle = "#FFFF00"
-                ctx.lineWidth = 2
-                ctx.strokeRect(
-                    320 * slice.x, 320 * slice.y,
-                    320, 320
+                ctx.drawImage(
+                    instance.opponent.opponentImage,
+                    32 * instance.x,
+                    32 * instance.y,
+                    32, 32
                 )
             }
         )
+
+        // if (this.grid) {
+        //     ctx.strokeStyle = "#AAAAAA50"
+        //     ctx.lineWidth = 2
+
+        //     ctx.beginPath()
+        //     for (let x = 32; x < this.canvas.width; x += 32) {
+        //         ctx.moveTo(x, 0)
+        //         ctx.lineTo(x, this.canvas.height)
+        //     }
+        //     for (let y = 32; y < this.canvas.height; y += 32) {
+        //         ctx.moveTo(0, y)
+        //         ctx.lineTo(this.canvas.width, y)
+        //     }
+        //     ctx.stroke()
+        // }
+
+        if (this.sublevelBounds) {
+            levelSlices.forEach(
+                slice => {
+                    ctx.fillStyle = "#fff"
+                    ctx.font = "400 13px"
+                    ctx.fillText(
+                        `[${slice.x}, ${slice.y}]`,
+                        320 * slice.x + 8, 320 * slice.y + 20
+                    )
+    
+                    
+                    ctx.strokeStyle = "#FFFF00"
+                    ctx.lineWidth = 2
+                    ctx.strokeRect(
+                        320 * slice.x, 320 * slice.y,
+                        320, 320
+                    )
+                }
+            )
+        }
 
         ctx.beginPath()
         ctx.arc(
@@ -234,35 +313,49 @@ export class Viewer {
         const rect = this.canvas.getBoundingClientRect()
 
         const x = Math.floor(
-            (e.clientX - rect.x) / 32
+            (e.clientX - rect.x - this.viewX) / 32
         )
         const y = Math.floor(
-            (e.clientY - rect.y) / 32
+            (e.clientY - rect.y - this.viewY) / 32
         )
 
-        if (e.buttons & 1 || e.type === "mouseup") {
+        if (
+            e.buttons & 1 ||
+            (e.type === "mouseup" && e.buttons & 1)
+        ) {
             this.currentTool.process(
                 this,
                 x, y,
                 e.type === "mousemove"
             )
+        } else if (e.type === "mousemove" && e.buttons & 4) {
+            this.viewX += e.movementX
+            this.viewY += e.movementY
+
+            this.render()
         } else {
             const tile = this.level.getTileAt(x, y)
             let tileId = "N/A"
             if (tile) tileId = tile.tile.id
 
+            const subX = Math.floor(x / 10)
+            const subY = Math.floor(y / 10)
+
             document.querySelector(
                 "div.viewerCoordinates"
             ).innerHTML = `
                 ${tileId}<br>
-                X: ${x}<br>
-                Y: ${y}<br>
-                Sublevel: ${Math.floor(x / 10)}, ${Math.floor(y / 10)}
+                X: ${x - subX * 10}<br>
+                Y: ${y - subY * 10}<br>
+                Sublevel: ${subX}, ${subY}
             `
         }
     }
 
     setupDOM() {
+        this.canvas.addEventListener(
+            "mousedown", (e) => this.processTool(e)
+        )
         this.canvas.addEventListener(
             "mouseup", (e) => this.processTool(e)
         )
@@ -345,6 +438,27 @@ export class Viewer {
             itemList.appendChild(itemDiv)
         })
 
+        const opponentList = document.querySelector("div.tileList.opponents")
+        this.availableOpponents.forEach(opponent => {
+            const opponentDiv = document.createElement("div")
+            opponentDiv.classList.add("tile")
+            opponentDiv.classList.toggle("active", this.currentOpponent === opponent)
+
+            opponentDiv.innerHTML = `
+                <img src="../res/opponents/${opponent.id}.png">
+                <p>${opponent.name}</p>
+            `
+
+            opponentDiv.addEventListener("click", () => {
+                opponentList.querySelector("div.active").classList.remove("active")
+                opponentDiv.classList.add("active")
+
+                this.currentOpponent = opponent
+            })
+
+            opponentList.appendChild(opponentDiv)
+        })
+
         document.querySelector("input#showGrid").addEventListener("input", (e) => {
             const input = e.target as HTMLInputElement
 
@@ -355,6 +469,12 @@ export class Viewer {
             const input = e.target as HTMLInputElement
 
             this.collisionBoxes = input.checked
+            this.render()
+        })
+        document.querySelector("input#showSublevels").addEventListener("input", (e) => {
+            const input = e.target as HTMLInputElement
+
+            this.sublevelBounds = input.checked
             this.render()
         })
     }

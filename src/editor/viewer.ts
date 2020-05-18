@@ -68,7 +68,9 @@ export class Viewer {
                 this.availableTiles.push(
                     new Tile(
                         file.substring(0, file.length - 4),
-                        file.startsWith("w_")
+                        file.startsWith("w_"),
+                        file.startsWith("wave"),
+                        file.startsWith("d_")
                     )
                 )
             } catch(e) {
@@ -397,6 +399,8 @@ export class Viewer {
 
             tileDiv.classList.toggle("floor", tile.id.startsWith("f_"))
             tileDiv.classList.toggle("wall", tile.id.startsWith("w_"))
+            tileDiv.classList.toggle("water", tile.water)
+            tileDiv.classList.toggle("door", tile.door)
 
             tileDiv.innerHTML = `
                 <img src="../res/tiles/${tile.id}.png">

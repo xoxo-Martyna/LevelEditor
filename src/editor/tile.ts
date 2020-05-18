@@ -3,7 +3,9 @@ export class Tile {
 
     constructor(
         public id: string,
-        public collidable = false
+        public collidable = false,
+        public water = false,
+        public door = false
     ) {}
 
     loadImage(): Promise<void> {

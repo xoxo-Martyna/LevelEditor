@@ -23,7 +23,7 @@ viewer.load().then(() => {
     );
 
     (window as any).genLevel = () => {
-        return level.fileData
+        return level.exportSlices()
     }
 })
 
@@ -77,6 +77,41 @@ const menu = Menu.buildFromTemplate(
                                 data.filePath,
                                 viewer.level.fileData,
                                 "utf-8"
+                            )
+                        })
+                    }
+                },
+                {
+                    type: "separator"
+                },
+                {
+                    label: "Export levels",
+                    click: () => {
+                        dialog.showSaveDialog(
+                            {
+                                filters: [
+                                    {
+                                        name: "xoxo-Game Level",
+                                        extensions: ["xoxo"]
+                                    }
+                                ]
+                            }
+                        ).then((data: any) => {
+                            if (data.canceled) return
+
+                            const slices = viewer.level.exportSlices()
+                            let prefix = data.filePath
+                            if (prefix.endsWith(".xoxo"))
+                                prefix = prefix.substring(0, prefix.length - 5)
+
+                            slices.forEach(
+                                slice => {
+                                    writeFileSync(
+                                        prefix + slice.sliceSuffix,
+                                        slice.sliceData,
+                                        "utf-8"
+                                    )
+                                }
                             )
                         })
                     }

@@ -159,7 +159,7 @@ main {
                             right: 8px;
                             top: 50%;
 
-                            background: #08f;
+                            background: #888;
                             color: #000;
                             content: "Floor";
 
@@ -180,6 +180,42 @@ main {
                             background: magenta;
                             color: #000;
                             content: "Wall";
+
+                            font-size: 10pt;
+                            font-weight: 700;
+
+                            padding: 2px 8px;
+                            border-radius: 6px;
+
+                            transform: translatey(-50%);
+                        }
+
+                        &.water::after {
+                            position: absolute;
+                            right: 8px;
+                            top: 50%;
+
+                            background: #55f;
+                            color: #000;
+                            content: "Water";
+
+                            font-size: 10pt;
+                            font-weight: 700;
+
+                            padding: 2px 8px;
+                            border-radius: 6px;
+
+                            transform: translatey(-50%);
+                        }
+
+                        &.door::after {
+                            position: absolute;
+                            right: 8px;
+                            top: 50%;
+
+                            background: rgb(135, 207, 75);
+                            color: #000;
+                            content: "Door";
 
                             font-size: 10pt;
                             font-weight: 700;

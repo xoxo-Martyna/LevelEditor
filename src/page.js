@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 250px;\n    min-width: 250px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList:not(.visible) {\n          display: none; }\n        main aside section.tileList div.tileList div.tile {\n          position: relative;\n          padding: 4px 8px;\n          border-radius: 2px;\n          display: flex;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile img {\n            width: 32px;\n            height: 32px;\n            margin-right: 4px; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n          main aside section.tileList div.tileList div.tile.floor::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #08f;\n            color: #000;\n            content: \"Floor\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.wall::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: magenta;\n            color: #000;\n            content: \"Wall\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.attack::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #f55;\n            color: #000;\n            content: \"Attack\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.defense::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #55f;\n            color: #000;\n            content: \"Defense\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.health::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #2f6;\n            color: #000;\n            content: \"Health\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n  main div.canvasContainer {\n    position: relative;\n    overflow: hidden;\n    flex-grow: 1; }\n    main div.canvasContainer canvas {\n      background: #1b1b1b; }\n    main div.canvasContainer div.viewerCoordinates {\n      position: absolute;\n      top: 8px;\n      right: 8px;\n      background: #0008;\n      font-family: monospace;\n      text-align: right;\n      padding: 8px 16px;\n      pointer-events: none; }\n", ""]);
+exports.push([module.i, "body {\n  background: #222222;\n  color: #fff;\n  font-family: \"Segoe UI\", sans-serif;\n  user-select: none; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background: #383838;\n  display: flex; }\n  main div.toolbar {\n    min-width: 36px;\n    padding: 2px;\n    border-right: 1px solid #fff1;\n    overflow-y: auto; }\n    main div.toolbar div.separator {\n      height: 1px;\n      background: #fff1;\n      margin: 4px 2px; }\n    main div.toolbar div.tool {\n      position: relative;\n      font-size: 0;\n      padding: 2px;\n      border-radius: 2px;\n      display: flex;\n      align-items: center; }\n      main div.toolbar div.tool img {\n        width: 24px;\n        height: 24px; }\n      main div.toolbar div.tool p {\n        color: #fff;\n        font-size: 9pt;\n        margin: 0 0 0 2px; }\n      main div.toolbar div.tool:hover {\n        background: #fff1; }\n      main div.toolbar div.tool:active {\n        background: #fff2; }\n      main div.toolbar div.tool.active {\n        background: #161616; }\n  main aside {\n    width: 250px;\n    min-width: 250px;\n    border-left: 1px solid #fff1;\n    display: flex;\n    flex-direction: column; }\n    main aside section {\n      display: flex;\n      flex-direction: column; }\n      main aside section:not(:last-child) {\n        border-bottom: 1px solid #fff1; }\n      main aside section header {\n        font-size: 10pt;\n        font-weight: 400;\n        text-align: center;\n        padding: 2px;\n        opacity: 0.5; }\n      main aside section div.layerViz {\n        display: flex; }\n        main aside section div.layerViz label {\n          font-size: 10pt;\n          padding-left: 8px;\n          flex-grow: 1; }\n      main aside section.tileList {\n        flex-grow: 1;\n        overflow-y: auto; }\n        main aside section.tileList div.tileList:not(.visible) {\n          display: none; }\n        main aside section.tileList div.tileList div.tile {\n          position: relative;\n          padding: 4px 8px;\n          border-radius: 2px;\n          display: flex;\n          align-items: center; }\n          main aside section.tileList div.tileList div.tile img {\n            width: 32px;\n            height: 32px;\n            margin-right: 4px; }\n          main aside section.tileList div.tileList div.tile:hover {\n            background: #fff1; }\n          main aside section.tileList div.tileList div.tile:active {\n            background: #fff2; }\n          main aside section.tileList div.tileList div.tile.active {\n            background: #161616; }\n          main aside section.tileList div.tileList div.tile p {\n            font-size: 10pt;\n            text-align: center;\n            margin: 0; }\n          main aside section.tileList div.tileList div.tile.floor::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #888;\n            color: #000;\n            content: \"Floor\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.wall::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: magenta;\n            color: #000;\n            content: \"Wall\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.water::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #55f;\n            color: #000;\n            content: \"Water\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.door::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #87cf4b;\n            color: #000;\n            content: \"Door\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.attack::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #f55;\n            color: #000;\n            content: \"Attack\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.defense::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #55f;\n            color: #000;\n            content: \"Defense\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n          main aside section.tileList div.tileList div.tile.health::after {\n            position: absolute;\n            right: 8px;\n            top: 50%;\n            background: #2f6;\n            color: #000;\n            content: \"Health\";\n            font-size: 10pt;\n            font-weight: 700;\n            padding: 2px 8px;\n            border-radius: 6px;\n            transform: translatey(-50%); }\n  main div.canvasContainer {\n    position: relative;\n    overflow: hidden;\n    flex-grow: 1; }\n    main div.canvasContainer canvas {\n      background: #1b1b1b; }\n    main div.canvasContainer div.viewerCoordinates {\n      position: absolute;\n      top: 8px;\n      right: 8px;\n      background: #0008;\n      font-family: monospace;\n      text-align: right;\n      padding: 8px 16px;\n      pointer-events: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -489,6 +489,31 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./src/editor/door.ts":
+/*!****************************!*\
+  !*** ./src/editor/door.ts ***!
+  \****************************/
+/*! exports provided: Door */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Door", function() { return Door; });
+var Door = /** @class */ (function () {
+    function Door(tile, x, y) {
+        this.tile = tile;
+        this.x = x;
+        this.y = y;
+        this.targetX = x;
+        this.targetY = y;
+    }
+    return Door;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/editor/item.ts":
 /*!****************************!*\
   !*** ./src/editor/item.ts ***!
@@ -544,6 +569,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemInstance", function() { return ItemInstance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OpponentInstance", function() { return OpponentInstance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Level", function() { return Level; });
+/* harmony import */ var _door__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./door */ "./src/editor/door.ts");
+
 var TileInstance = /** @class */ (function () {
     function TileInstance(tile, x, y) {
         this.tile = tile;
@@ -664,8 +691,79 @@ var Level = /** @class */ (function () {
             instance.tile = tile;
         }
         else {
-            this.tiles.push(new TileInstance(tile, x, y));
+            this.tiles.push(tile.door ? new _door__WEBPACK_IMPORTED_MODULE_0__["Door"](tile, x, y)
+                : new TileInstance(tile, x, y));
         }
+    };
+    Level.prototype.exportSlice = function (slice) {
+        var tiles = [];
+        var lines = [];
+        var left = slice.x * 10;
+        var top = slice.y * 10;
+        lines.push("Dimensions 10 10");
+        if (this.spawnX >= left ||
+            this.spawnY >= top ||
+            this.spawnX < left + 10 ||
+            this.spawnY < top + 10)
+            lines.push("SpawnPoint " + this.spawnX + " " + this.spawnY);
+        this.tiles.forEach(function (tile) {
+            if (tile.x < left ||
+                tile.y < top ||
+                tile.x >= left + 10 ||
+                tile.y >= top + 10)
+                return;
+            var tileref = tiles.find(function (t) { return t.tile === tile.tile; });
+            if (!tileref) {
+                tiles.push({
+                    tile: tile.tile,
+                    coords: [tile.x - left, tile.y - top]
+                });
+            }
+            else {
+                tileref.coords.push(tile.x - left, tile.y - top);
+            }
+        });
+        tiles.forEach(function (tileref) {
+            var tileData = tileref.tile.id + " " + tileref.coords.join(" ");
+            if (tileref.tile.water) {
+                lines.push("WaterTile " + tileData);
+            }
+            else if (tileref.tile.door) {
+                lines.push("// Door tiles - convert to door data!\n// " + tileData);
+            }
+            else {
+                lines.push("Tile " + tileData);
+            }
+        });
+        lines.push("");
+        this.items.forEach(function (item) {
+            if (item.x < left ||
+                item.y < top ||
+                item.x >= left + 10 ||
+                item.y >= top + 10)
+                return;
+            lines.push("Item " + item.item.id + " " + item.x + " " + item.y);
+        });
+        lines.push("");
+        this.opponents.forEach(function (opponent) {
+            if (opponent.x < left ||
+                opponent.y < top ||
+                opponent.x >= left + 10 ||
+                opponent.y >= top + 10)
+                return;
+            lines.push("Opponent " + opponent.opponent.id + " " + opponent.x + " " + opponent.y);
+        });
+        lines.push("");
+        return lines.join("\n");
+    };
+    Level.prototype.exportSlices = function () {
+        var _this = this;
+        return this.slices.map(function (slice) {
+            return {
+                sliceSuffix: "_" + slice.x + "_" + slice.y + ".xoxo",
+                sliceData: _this.exportSlice(slice)
+            };
+        });
     };
     Level.fromFileData = function (context, data) {
         var json = JSON.parse(data);
@@ -766,10 +864,14 @@ var Opponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tile", function() { return Tile; });
 var Tile = /** @class */ (function () {
-    function Tile(id, collidable) {
+    function Tile(id, collidable, water, door) {
         if (collidable === void 0) { collidable = false; }
+        if (water === void 0) { water = false; }
+        if (door === void 0) { door = false; }
         this.id = id;
         this.collidable = collidable;
+        this.water = water;
+        this.door = door;
     }
     Tile.prototype.loadImage = function () {
         var _this = this;
@@ -1161,7 +1263,7 @@ var Viewer = /** @class */ (function () {
                         for (_i = 0, fileList_1 = fileList; _i < fileList_1.length; _i++) {
                             file = fileList_1[_i];
                             try {
-                                this.availableTiles.push(new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"](file.substring(0, file.length - 4), file.startsWith("w_")));
+                                this.availableTiles.push(new _tile__WEBPACK_IMPORTED_MODULE_0__["Tile"](file.substring(0, file.length - 4), file.startsWith("w_"), file.startsWith("wave"), file.startsWith("d_")));
                             }
                             catch (e) {
                                 console.log("Oops!");
@@ -1377,6 +1479,8 @@ var Viewer = /** @class */ (function () {
             tileDiv.classList.toggle("active", _this.currentTile === tile);
             tileDiv.classList.toggle("floor", tile.id.startsWith("f_"));
             tileDiv.classList.toggle("wall", tile.id.startsWith("w_"));
+            tileDiv.classList.toggle("water", tile.water);
+            tileDiv.classList.toggle("door", tile.door);
             tileDiv.innerHTML = "\n                <img src=\"../res/tiles/" + tile.id + ".png\">\n                <p>" + tile.id + "</p>\n            ";
             tileDiv.addEventListener("click", function () {
                 tileList.querySelector("div.active").classList.remove("active");
@@ -1540,7 +1644,7 @@ viewer.load().then(function () {
     viewer.loadLevel(level);
     window.addEventListener("resize", function () { return viewer.render(); });
     window.genLevel = function () {
-        return level.fileData;
+        return level.exportSlices();
     };
 });
 var menu = Menu.buildFromTemplate([
@@ -1580,6 +1684,32 @@ var menu = Menu.buildFromTemplate([
                         if (data.canceled)
                             return;
                         Object(fs__WEBPACK_IMPORTED_MODULE_3__["writeFileSync"])(data.filePath, viewer.level.fileData, "utf-8");
+                    });
+                }
+            },
+            {
+                type: "separator"
+            },
+            {
+                label: "Export levels",
+                click: function () {
+                    dialog.showSaveDialog({
+                        filters: [
+                            {
+                                name: "xoxo-Game Level",
+                                extensions: ["xoxo"]
+                            }
+                        ]
+                    }).then(function (data) {
+                        if (data.canceled)
+                            return;
+                        var slices = viewer.level.exportSlices();
+                        var prefix = data.filePath;
+                        if (prefix.endsWith(".xoxo"))
+                            prefix = prefix.substring(0, prefix.length - 5);
+                        slices.forEach(function (slice) {
+                            Object(fs__WEBPACK_IMPORTED_MODULE_3__["writeFileSync"])(prefix + slice.sliceSuffix, slice.sliceData, "utf-8");
+                        });
                     });
                 }
             }

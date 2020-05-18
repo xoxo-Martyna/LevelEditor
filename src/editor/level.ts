@@ -2,6 +2,7 @@ import { Tile } from "./tile";
 import { Viewer } from "./viewer";
 import { Item } from "./item";
 import { Opponent } from "./opponent";
+import { Door } from "./door";
 
 export class TileInstance {
     constructor(
@@ -27,10 +28,12 @@ export class OpponentInstance {
     ) {}
 }
 
+export type TileOrDoor = TileInstance | Door
+
 export class Level {
     constructor(
         public context: Viewer,
-        public tiles: TileInstance[] = [],
+        public tiles: TileOrDoor[] = [],
         public items: ItemInstance[] = [],
         public opponents: OpponentInstance[] = [],
         public spawnX: number,
@@ -151,9 +154,116 @@ export class Level {
             instance.tile = tile
         } else {
             this.tiles.push(
-                new TileInstance(tile, x, y)
+                tile.door ? new Door(tile, x, y)
+                          : new TileInstance(tile, x, y)
             )
         }
+    }
+
+    exportSlice(slice: {
+        x: number, y: number
+    }): string {
+        const tiles: {
+            tile: Tile,
+            coords: number[]
+        }[] = []
+        const lines: string[] = []
+
+        const left = slice.x * 10
+        const top = slice.y * 10
+
+        lines.push("Dimensions 10 10")
+
+        if (
+            this.spawnX >= left ||
+            this.spawnY >= top ||
+            this.spawnX < left + 10 ||
+            this.spawnY < top + 10
+        )
+            lines.push(`SpawnPoint ${this.spawnX} ${this.spawnY}`)
+
+        this.tiles.forEach(
+            tile => {
+                if (
+                    tile.x < left ||
+                    tile.y < top ||
+                    tile.x >= left + 10 ||
+                    tile.y >= top + 10
+                )
+                    return
+
+                const tileref = tiles.find(t => t.tile === tile.tile)
+                if (!tileref) {
+                    tiles.push({
+                        tile: tile.tile,
+                        coords: [tile.x - left, tile.y - top]
+                    })
+                } else {
+                    tileref.coords.push(tile.x - left, tile.y - top)
+                }
+            }
+        )
+
+        tiles.forEach(
+            tileref => {
+                const tileData = `${tileref.tile.id} ${tileref.coords.join(" ")}`
+
+                if (tileref.tile.water) {
+                    lines.push(`WaterTile ${tileData}`)
+                } else if (tileref.tile.door) {
+                    lines.push(`// Door tiles - convert to door data!\n// ${tileData}`)
+                } else {
+                    lines.push(`Tile ${tileData}`)
+                }
+            }
+        )
+        lines.push("")
+
+        this.items.forEach(
+            item => {
+                if (
+                    item.x < left ||
+                    item.y < top ||
+                    item.x >= left + 10 ||
+                    item.y >= top + 10
+                )
+                    return
+                
+                lines.push(`Item ${item.item.id} ${item.x} ${item.y}`)
+            }
+        )
+        lines.push("")
+
+        this.opponents.forEach(
+            opponent => {
+                if (
+                    opponent.x < left ||
+                    opponent.y < top ||
+                    opponent.x >= left + 10 ||
+                    opponent.y >= top + 10
+                )
+                    return
+                
+                lines.push(`Opponent ${opponent.opponent.id} ${opponent.x} ${opponent.y}`)
+            }
+        )
+        lines.push("")
+
+        return lines.join("\n")
+    }
+
+    exportSlices(): {
+        sliceSuffix: string,
+        sliceData: string
+    }[] {
+        return this.slices.map(
+            slice => {
+                return {
+                    sliceSuffix: `_${slice.x}_${slice.y}.xoxo`,
+                    sliceData: this.exportSlice(slice)
+                }
+            }
+        )
     }
 
     static fromFileData(context: Viewer, data: string) {

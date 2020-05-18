@@ -1292,20 +1292,20 @@ var Viewer = /** @class */ (function () {
                 return;
             ctx.drawImage(instance.opponent.opponentImage, 32 * instance.x, 32 * instance.y, 32, 32);
         });
-        // if (this.grid) {
-        //     ctx.strokeStyle = "#AAAAAA50"
-        //     ctx.lineWidth = 2
-        //     ctx.beginPath()
-        //     for (let x = 32; x < this.canvas.width; x += 32) {
-        //         ctx.moveTo(x, 0)
-        //         ctx.lineTo(x, this.canvas.height)
-        //     }
-        //     for (let y = 32; y < this.canvas.height; y += 32) {
-        //         ctx.moveTo(0, y)
-        //         ctx.lineTo(this.canvas.width, y)
-        //     }
-        //     ctx.stroke()
-        // }
+        if (this.grid) {
+            ctx.strokeStyle = "#AAAAAA50";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            for (var x = Math.floor(-this.viewX / 32) * 32; x < this.canvas.width + Math.ceil(-this.viewX / 32) * 32; x += 32) {
+                ctx.moveTo(x, -this.viewY);
+                ctx.lineTo(x, this.canvas.height - this.viewY);
+            }
+            for (var y = Math.floor(-this.viewY / 32) * 32; y < this.canvas.height + Math.ceil(-this.viewY / 32) * 32; y += 32) {
+                ctx.moveTo(-this.viewX, y);
+                ctx.lineTo(this.canvas.width - this.viewX, y);
+            }
+            ctx.stroke();
+        }
         if (this.sublevelBounds) {
             levelSlices.forEach(function (slice) {
                 ctx.fillStyle = "#fff";

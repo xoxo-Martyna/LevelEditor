@@ -752,7 +752,7 @@ var Level = /** @class */ (function () {
                 item.x >= left + 10 ||
                 item.y >= top + 10)
                 return;
-            lines.push("Item " + item.item.id + " " + item.x + " " + item.y);
+            lines.push("Item " + item.item.id + " " + (item.x - left) + " " + (item.y - top));
         });
         lines.push("");
         this.opponents.forEach(function (opponent) {
@@ -761,7 +761,7 @@ var Level = /** @class */ (function () {
                 opponent.x >= left + 10 ||
                 opponent.y >= top + 10)
                 return;
-            lines.push("Opponent " + opponent.opponent.id + " " + opponent.x + " " + opponent.y);
+            lines.push("Opponent " + opponent.opponent.id + " " + (opponent.x - left) + " " + (opponent.y - top));
         });
         lines.push("");
         lines.push("LightSource ambient 1.0 1.0 1.0");

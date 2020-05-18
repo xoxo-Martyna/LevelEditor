@@ -151,7 +151,17 @@ export class Level {
     setTileAt(x: number, y: number, tile: Tile) {
         const instance = this.getTileAt(x, y)
         if (instance) {
-            instance.tile = tile
+            if (
+                instance instanceof Door && tile.door ||
+                instance instanceof TileInstance && !tile.door
+            ) {
+                instance.tile = tile
+            } else {
+                this.tiles.splice(
+                    this.tiles.findIndex(i => i.x === x && i.y === y), 1
+                )
+                this.setTileAt(x, y, tile)
+            }
         } else {
             this.tiles.push(
                 tile.door ? new Door(tile, x, y)
@@ -160,7 +170,7 @@ export class Level {
         }
     }
 
-    exportSlice(slice: {
+    exportSlice(levelPrefix: string, slice: {
         x: number, y: number
     }): string {
         const tiles: {
@@ -192,14 +202,20 @@ export class Level {
                 )
                     return
 
-                const tileref = tiles.find(t => t.tile === tile.tile)
-                if (!tileref) {
-                    tiles.push({
-                        tile: tile.tile,
-                        coords: [tile.x - left, tile.y - top]
-                    })
+                if (tile instanceof Door) {
+                    const targetSuffix = `_${Math.floor(tile.targetX / 10)}_${Math.floor(tile.targetY / 10)}`
+
+                    lines.push(`DoorTile ${tile.tile.id} ${tile.x - left} ${tile.y - top} ${levelPrefix}${targetSuffix} ${tile.targetX - Math.floor(tile.targetX / 10) * 10} ${tile.targetY - Math.floor(tile.targetY / 10) * 10}`)
                 } else {
-                    tileref.coords.push(tile.x - left, tile.y - top)
+                    const tileref = tiles.find(t => t.tile === tile.tile)
+                    if (!tileref) {
+                        tiles.push({
+                            tile: tile.tile,
+                            coords: [tile.x - left, tile.y - top]
+                        })
+                    } else {
+                        tileref.coords.push(tile.x - left, tile.y - top)
+                    }
                 }
             }
         )
@@ -210,8 +226,6 @@ export class Level {
 
                 if (tileref.tile.water) {
                     lines.push(`WaterTile ${tileData}`)
-                } else if (tileref.tile.door) {
-                    lines.push(`// Door tiles - convert to door data!\n// ${tileData}`)
                 } else {
                     lines.push(`Tile ${tileData}`)
                 }
@@ -248,19 +262,21 @@ export class Level {
             }
         )
         lines.push("")
+        lines.push("LightSource ambient 1.0 1.0 1.0")
 
         return lines.join("\n")
     }
 
-    exportSlices(): {
+    exportSlices(levelPrefix: string): {
         sliceSuffix: string,
         sliceData: string
     }[] {
+        console.log(levelPrefix)
         return this.slices.map(
             slice => {
                 return {
                     sliceSuffix: `_${slice.x}_${slice.y}.xoxo`,
-                    sliceData: this.exportSlice(slice)
+                    sliceData: this.exportSlice(levelPrefix, slice)
                 }
             }
         )
@@ -273,7 +289,15 @@ export class Level {
             (tilespec: any) => {
                 const tile = context.availableTiles.find(t => t.id === tilespec.id)
 
-                return new TileInstance(tile, tilespec.x, tilespec.y)
+                if (tilespec.door) {
+                    const door = new Door(tile, tilespec.x, tilespec.y)
+                    door.targetX = tilespec.targetX
+                    door.targetY = tilespec.targetY
+
+                    return door
+                } else {
+                    return new TileInstance(tile, tilespec.x, tilespec.y)
+                }
             }
         )
         const items = json.items.map(
@@ -306,10 +330,21 @@ export class Level {
                 },
                 tiles: this.tiles.map(
                     tile => {
-                        return {
-                            x: tile.x,
-                            y: tile.y,
-                            id: tile.tile.id
+                        if (tile instanceof Door) {
+                            return {
+                                door: true,
+                                x: tile.x,
+                                y: tile.y,
+                                targetX: tile.targetX,
+                                targetY: tile.targetY,
+                                id: tile.tile.id
+                            }
+                        } else {
+                            return {
+                                x: tile.x,
+                                y: tile.y,
+                                id: tile.tile.id
+                            }
                         }
                     }
                 ),

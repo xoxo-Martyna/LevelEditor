@@ -21,10 +21,6 @@ viewer.load().then(() => {
     window.addEventListener(
         "resize", () => viewer.render()
     );
-
-    (window as any).genLevel = () => {
-        return level.exportSlices()
-    }
 })
 
 const menu = Menu.buildFromTemplate(
@@ -99,10 +95,15 @@ const menu = Menu.buildFromTemplate(
                         ).then((data: any) => {
                             if (data.canceled) return
 
-                            const slices = viewer.level.exportSlices()
                             let prefix = data.filePath
                             if (prefix.endsWith(".xoxo"))
                                 prefix = prefix.substring(0, prefix.length - 5)
+
+                            const pathComponents = prefix.split("\\")
+
+                            const slices = viewer.level.exportSlices(
+                                pathComponents[pathComponents.length - 1]
+                            )
 
                             slices.forEach(
                                 slice => {

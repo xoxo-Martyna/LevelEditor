@@ -688,14 +688,21 @@ var Level = /** @class */ (function () {
     Level.prototype.setTileAt = function (x, y, tile) {
         var instance = this.getTileAt(x, y);
         if (instance) {
-            instance.tile = tile;
+            if (instance instanceof _door__WEBPACK_IMPORTED_MODULE_0__["Door"] && tile.door ||
+                instance instanceof TileInstance && !tile.door) {
+                instance.tile = tile;
+            }
+            else {
+                this.tiles.splice(this.tiles.findIndex(function (i) { return i.x === x && i.y === y; }), 1);
+                this.setTileAt(x, y, tile);
+            }
         }
         else {
             this.tiles.push(tile.door ? new _door__WEBPACK_IMPORTED_MODULE_0__["Door"](tile, x, y)
                 : new TileInstance(tile, x, y));
         }
     };
-    Level.prototype.exportSlice = function (slice) {
+    Level.prototype.exportSlice = function (levelPrefix, slice) {
         var tiles = [];
         var lines = [];
         var left = slice.x * 10;
@@ -712,24 +719,27 @@ var Level = /** @class */ (function () {
                 tile.x >= left + 10 ||
                 tile.y >= top + 10)
                 return;
-            var tileref = tiles.find(function (t) { return t.tile === tile.tile; });
-            if (!tileref) {
-                tiles.push({
-                    tile: tile.tile,
-                    coords: [tile.x - left, tile.y - top]
-                });
+            if (tile instanceof _door__WEBPACK_IMPORTED_MODULE_0__["Door"]) {
+                var targetSuffix = "_" + Math.floor(tile.targetX / 10) + "_" + Math.floor(tile.targetY / 10);
+                lines.push("DoorTile " + tile.tile.id + " " + (tile.x - left) + " " + (tile.y - top) + " " + levelPrefix + targetSuffix + " " + (tile.targetX - Math.floor(tile.targetX / 10) * 10) + " " + (tile.targetY - Math.floor(tile.targetY / 10) * 10));
             }
             else {
-                tileref.coords.push(tile.x - left, tile.y - top);
+                var tileref = tiles.find(function (t) { return t.tile === tile.tile; });
+                if (!tileref) {
+                    tiles.push({
+                        tile: tile.tile,
+                        coords: [tile.x - left, tile.y - top]
+                    });
+                }
+                else {
+                    tileref.coords.push(tile.x - left, tile.y - top);
+                }
             }
         });
         tiles.forEach(function (tileref) {
             var tileData = tileref.tile.id + " " + tileref.coords.join(" ");
             if (tileref.tile.water) {
                 lines.push("WaterTile " + tileData);
-            }
-            else if (tileref.tile.door) {
-                lines.push("// Door tiles - convert to door data!\n// " + tileData);
             }
             else {
                 lines.push("Tile " + tileData);
@@ -754,14 +764,16 @@ var Level = /** @class */ (function () {
             lines.push("Opponent " + opponent.opponent.id + " " + opponent.x + " " + opponent.y);
         });
         lines.push("");
+        lines.push("LightSource ambient 1.0 1.0 1.0");
         return lines.join("\n");
     };
-    Level.prototype.exportSlices = function () {
+    Level.prototype.exportSlices = function (levelPrefix) {
         var _this = this;
+        console.log(levelPrefix);
         return this.slices.map(function (slice) {
             return {
                 sliceSuffix: "_" + slice.x + "_" + slice.y + ".xoxo",
-                sliceData: _this.exportSlice(slice)
+                sliceData: _this.exportSlice(levelPrefix, slice)
             };
         });
     };
@@ -769,7 +781,15 @@ var Level = /** @class */ (function () {
         var json = JSON.parse(data);
         var tiles = json.tiles.map(function (tilespec) {
             var tile = context.availableTiles.find(function (t) { return t.id === tilespec.id; });
-            return new TileInstance(tile, tilespec.x, tilespec.y);
+            if (tilespec.door) {
+                var door = new _door__WEBPACK_IMPORTED_MODULE_0__["Door"](tile, tilespec.x, tilespec.y);
+                door.targetX = tilespec.targetX;
+                door.targetY = tilespec.targetY;
+                return door;
+            }
+            else {
+                return new TileInstance(tile, tilespec.x, tilespec.y);
+            }
         });
         var items = json.items.map(function (itemspec) {
             var item = context.availableItems.find(function (i) { return i.id === itemspec.id; });
@@ -789,11 +809,23 @@ var Level = /** @class */ (function () {
                     y: this.spawnY
                 },
                 tiles: this.tiles.map(function (tile) {
-                    return {
-                        x: tile.x,
-                        y: tile.y,
-                        id: tile.tile.id
-                    };
+                    if (tile instanceof _door__WEBPACK_IMPORTED_MODULE_0__["Door"]) {
+                        return {
+                            door: true,
+                            x: tile.x,
+                            y: tile.y,
+                            targetX: tile.targetX,
+                            targetY: tile.targetY,
+                            id: tile.tile.id
+                        };
+                    }
+                    else {
+                        return {
+                            x: tile.x,
+                            y: tile.y,
+                            id: tile.tile.id
+                        };
+                    }
                 }),
                 items: this.items.map(function (item) {
                     return {
@@ -1092,6 +1124,47 @@ var FillTileTool = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/editor/tools/setDoorTarget.ts":
+/*!*******************************************!*\
+  !*** ./src/editor/tools/setDoorTarget.ts ***!
+  \*******************************************/
+/*! exports provided: SetDoorTargetTool */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetDoorTargetTool", function() { return SetDoorTargetTool; });
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tool */ "./src/editor/tools/tool.ts");
+/* harmony import */ var _door__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../door */ "./src/editor/door.ts");
+
+
+var SetDoorTargetTool = /** @class */ (function () {
+    function SetDoorTargetTool() {
+        this.id = "setDoorTarget";
+        this.name = "Set door target";
+        this.type = _tool__WEBPACK_IMPORTED_MODULE_0__["ToolType"].tile;
+    }
+    SetDoorTargetTool.prototype.process = function (context, x, y, continuous) {
+        if (continuous)
+            return;
+        var tile = context.level.getTileAt(x, y);
+        if (!this.door && tile instanceof _door__WEBPACK_IMPORTED_MODULE_1__["Door"]) {
+            this.door = tile;
+        }
+        else if (this.door) {
+            this.door.targetX = x;
+            this.door.targetY = y;
+            this.door = null;
+            context.render();
+        }
+    };
+    return SetDoorTargetTool;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/editor/tools/setSpawnPoint.ts":
 /*!*******************************************!*\
   !*** ./src/editor/tools/setSpawnPoint.ts ***!
@@ -1173,6 +1246,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_eraseObject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./tools/eraseObject */ "./src/editor/tools/eraseObject.ts");
 /* harmony import */ var _tools_addOpponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./tools/addOpponent */ "./src/editor/tools/addOpponent.ts");
 /* harmony import */ var _opponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./opponent */ "./src/editor/opponent.ts");
+/* harmony import */ var _door__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./door */ "./src/editor/door.ts");
+/* harmony import */ var _tools_setDoorTarget__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./tools/setDoorTarget */ "./src/editor/tools/setDoorTarget.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1222,6 +1297,8 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
 var Viewer = /** @class */ (function () {
     function Viewer() {
         this.grid = true;
@@ -1234,6 +1311,7 @@ var Viewer = /** @class */ (function () {
             new _tools_drawTile__WEBPACK_IMPORTED_MODULE_1__["DrawTileTool"](),
             new _tools_fillTile__WEBPACK_IMPORTED_MODULE_2__["FillTileTool"](),
             new _tools_eraseTile__WEBPACK_IMPORTED_MODULE_3__["EraseTileTool"](),
+            new _tools_setDoorTarget__WEBPACK_IMPORTED_MODULE_14__["SetDoorTargetTool"](),
             new _tools_setSpawnPoint__WEBPACK_IMPORTED_MODULE_4__["SetSpawnPointTool"](),
             new _tools_addItem__WEBPACK_IMPORTED_MODULE_9__["AddItemTool"](),
             new _tools_addOpponent__WEBPACK_IMPORTED_MODULE_11__["AddOpponentTool"](),
@@ -1377,6 +1455,20 @@ var Viewer = /** @class */ (function () {
                 ctx.lineWidth = 1;
                 ctx.stroke();
             }
+        });
+        this.level.tiles.filter(function (instance) { return instance instanceof _door__WEBPACK_IMPORTED_MODULE_13__["Door"]; }).forEach(function (instance) {
+            ctx.beginPath();
+            ctx.arc(32 * instance.x + 16, 32 * instance.y + 16, 8, 0, 2 * Math.PI);
+            ctx.moveTo(32 * instance.x + 16, 32 * instance.y + 16);
+            ctx.lineTo(32 * instance.targetX + 16, 32 * instance.targetY + 16);
+            ctx.strokeStyle = "#0080FF";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(32 * instance.targetX + 16, 32 * instance.targetY + 16, 8, 0, 2 * Math.PI);
+            ctx.strokeStyle = "#FF8000";
+            ctx.lineWidth = 2;
+            ctx.stroke();
         });
         this.level.items.forEach(function (instance) {
             if (instance.x < viewTileLeft ||
@@ -1643,9 +1735,6 @@ viewer.load().then(function () {
     var level = new _editor_level__WEBPACK_IMPORTED_MODULE_2__["Level"](viewer, [], [], [], 2, 2);
     viewer.loadLevel(level);
     window.addEventListener("resize", function () { return viewer.render(); });
-    window.genLevel = function () {
-        return level.exportSlices();
-    };
 });
 var menu = Menu.buildFromTemplate([
     {
@@ -1703,10 +1792,11 @@ var menu = Menu.buildFromTemplate([
                     }).then(function (data) {
                         if (data.canceled)
                             return;
-                        var slices = viewer.level.exportSlices();
                         var prefix = data.filePath;
                         if (prefix.endsWith(".xoxo"))
                             prefix = prefix.substring(0, prefix.length - 5);
+                        var pathComponents = prefix.split("\\");
+                        var slices = viewer.level.exportSlices(pathComponents[pathComponents.length - 1]);
                         slices.forEach(function (slice) {
                             Object(fs__WEBPACK_IMPORTED_MODULE_3__["writeFileSync"])(prefix + slice.sliceSuffix, slice.sliceData, "utf-8");
                         });

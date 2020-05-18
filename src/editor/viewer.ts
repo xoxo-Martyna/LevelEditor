@@ -13,6 +13,8 @@ import { AddItemTool } from "./tools/addItem"
 import { EraseObjectTool } from "./tools/eraseObject"
 import { AddOpponentTool } from "./tools/addOpponent"
 import { Opponent } from "./opponent"
+import { Door } from "./door"
+import { SetDoorTargetTool } from "./tools/setDoorTarget"
 
 export class Viewer {
     public grid = true
@@ -32,6 +34,8 @@ export class Viewer {
         new DrawTileTool(),
         new FillTileTool(),
         new EraseTileTool(),
+
+        new SetDoorTargetTool(),
 
         new SetSpawnPointTool(),
 
@@ -214,6 +218,42 @@ export class Viewer {
                     ctx.lineWidth = 1
                     ctx.stroke()
                 }
+            }
+        )
+
+        this.level.tiles.filter(
+            instance => instance instanceof Door
+        ).forEach(
+            instance => {
+                ctx.beginPath()
+                ctx.arc(
+                    32 * instance.x + 16,
+                    32 * instance.y + 16,
+                    8, 0, 2 * Math.PI
+                )
+                ctx.moveTo(
+                    32 * instance.x + 16,
+                    32 * instance.y + 16
+                )
+                ctx.lineTo(
+                    32 * (instance as Door).targetX + 16,
+                    32 * (instance as Door).targetY + 16
+                )
+
+                ctx.strokeStyle = "#0080FF"
+                ctx.lineWidth = 2
+                ctx.stroke()
+
+                ctx.beginPath()
+                ctx.arc(
+                    32 * (instance as Door).targetX + 16,
+                    32 * (instance as Door).targetY + 16,
+                    8, 0, 2 * Math.PI
+                )
+
+                ctx.strokeStyle = "#FF8000"
+                ctx.lineWidth = 2
+                ctx.stroke()
             }
         )
 
